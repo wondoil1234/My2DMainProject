@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RobbyUI
   Button_GameStart: {fileID: 2980123916821389891}
-  Button_GaemQuit: {fileID: 7040471701222301322}
+  Button_GameQuit: {fileID: 0}
 --- !u!1 &898925346281043133
 GameObject:
   m_ObjectHideFlags: 0
