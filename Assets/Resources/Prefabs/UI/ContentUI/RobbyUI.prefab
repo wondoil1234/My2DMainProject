@@ -186,7 +186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6791440763942583202
 RectTransform:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RobbyUI
   Button_GameStart: {fileID: 2980123916821389891}
-  Button_GameQuit: {fileID: 0}
+  Button_GameQuit: {fileID: 7040471701222301322}
 --- !u!1 &898925346281043133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,7 +1018,7 @@ GameObject:
   - component: {fileID: 8635546840245302737}
   - component: {fileID: 7040471701222301322}
   m_Layer: 5
-  m_Name: Button_GamQuit
+  m_Name: Button_GameQuit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
