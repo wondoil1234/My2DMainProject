@@ -24,16 +24,14 @@ public class DaniTech_LoadingUI : DaniTechUIBase
 
     private void LoadAndSetLoadingImg()
     {
-        int randomIdx = UnityEngine.Random.Range(0, 2);
+        int randomIdx = UnityEngine.Random.Range(0, 1);
 
         string texturePath = string.Empty;
         switch (randomIdx)
         {
+           
             case 0:
-                texturePath = "Texture2D/Texture2D_Loading_1";
-                break;
-            case 1:
-                texturePath = "Texture2D/Texture2D_Loading_2";
+                texturePath = "Texture2D/Texture2D_Loading_3";
                 break;
         }
 

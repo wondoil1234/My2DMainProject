@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 80e8e0aaab7e37b4084b72f287df5f5d
   m_SerializeEntries:
+  - m_GUID: 0a5c6241a094ee1488bb21a03cc8c614
+    m_Address: Texture2D/Texture2D_Loading_3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0d079c0737bf2f246b127fb22a014fa1
     m_Address: Sound/Voice_Pug_2_failed
     m_ReadOnly: 0

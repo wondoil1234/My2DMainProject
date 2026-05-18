@@ -410,6 +410,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1768298896 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1758842949865179512, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
+  m_PrefabInstance: {fileID: 545839015281086434}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &2025092671
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,9 +508,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1005625952}
     m_Modifications:
+    - target: {fileID: 259785703473651479, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 259785703473651479, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2293273306346156135, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
       propertyPath: m_Name
       value: LoadingPopupUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646753446856939214, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5346621865228317501, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
+      propertyPath: m_Texture
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7171257689507278994, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
       propertyPath: m_Pivot.x
@@ -579,6 +606,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7171257689507278994, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587004953413650076, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
+      propertyPath: Image_SliderColor
+      value: 
+      objectReference: {fileID: 1768298896}
+    - target: {fileID: 7587004953413650076, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
+      propertyPath: ColorArray_LoadingBar.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424253479084383832, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424253479084383832, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424253479084383832, guid: 0d266285c0e66ad47ad3deec34a09e27, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
