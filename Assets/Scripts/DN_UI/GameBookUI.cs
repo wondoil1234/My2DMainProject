@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameBookUI : DaniTechUIBase
@@ -18,5 +19,20 @@ public class GameBookUI : DaniTechUIBase
     [Header("슬롯 리스트 영역")]
     [SerializeField] private Transform Transform_SlotRoot;
 
+    private Dictionary<string, GameBookSlotUI> _slotList = new Dictionary<string, GameBookSlotUI>();
 
+
+
+    private void CreateGameBookSlot(string dataId)
+    {
+        var Gobj = Instantiate(Prefab_Slot, Transform_SlotRoot);
+        if (Gobj == null) return;
+
+        var SlotComponent = Gobj.GetComponent<GameBookSlotUI>();
+        if(SlotComponent == null) return;
+
+        SlotComponent.InitSlot(dataId);
+        _slotList.Add(dataId, SlotComponent);
+
+    }
 }
