@@ -21,6 +21,23 @@ public class GameBookUI : DaniTechUIBase
 
     private Dictionary<string, GameBookSlotUI> _slotList = new Dictionary<string, GameBookSlotUI>();
 
+    private void OnEnable()
+    {
+        ReadItemListAndCreateSlot();
+    }
+
+    private void ReadItemListAndCreateSlot()
+    {
+        var DatList = DaniTechGameDataManager.Instance.ItemDataList;
+        foreach (var datakv in DatList)
+        {
+            var data = datakv.Value;
+            if(data == null) continue;
+
+            CreateGameBookSlot(data.Id);
+        }
+    }
+
 
 
     private void CreateGameBookSlot(string dataId)
