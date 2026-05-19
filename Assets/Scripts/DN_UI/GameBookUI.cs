@@ -46,10 +46,15 @@ public class GameBookUI : DaniTechUIBase
         if (Gobj == null) return;
 
         var SlotComponent = Gobj.GetComponent<GameBookSlotUI>();
-        if(SlotComponent == null) return;
+        if (SlotComponent == null) return;
 
-        SlotComponent.InitSlot(dataId);
+        SlotComponent.InitSlot(dataId, OnClickChildSlotSelected);
         _slotList.Add(dataId, SlotComponent);
 
+    }
+
+    private void OnClickChildSlotSelected(string slotDataId)
+    {
+        int a = 0;
     }
 }

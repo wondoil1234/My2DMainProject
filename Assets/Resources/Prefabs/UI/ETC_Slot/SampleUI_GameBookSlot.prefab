@@ -468,6 +468,7 @@ MonoBehaviour:
   Image_MainIcon: {fileID: 3631303208468773249}
   Text_MainName: {fileID: 9089231917153593946}
   Gobj_Selected: {fileID: 971841203363717671}
+  Button_SlotClick: {fileID: 7975640266369300643}
 --- !u!1 &4486479980530384108
 GameObject:
   m_ObjectHideFlags: 0
