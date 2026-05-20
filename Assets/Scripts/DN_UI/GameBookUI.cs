@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
+using System;
+
 
 public class GameBookUI : DaniTechUIBase
 {
@@ -11,6 +14,8 @@ public class GameBookUI : DaniTechUIBase
     [SerializeField] private Image Image_MainIcon;
     [SerializeField] private Text Text_MainName;
     [SerializeField] private Text Text_Descripction;
+
+    [SerializeField] private DaniTechUIButton Button_CloseUI;
 
     //[Header("부가 정보")]
     //[SerializeField] private GameObject Layout_SubInfoSkill;
@@ -24,6 +29,27 @@ public class GameBookUI : DaniTechUIBase
     private void OnEnable()
     {
         ReadItemListAndCreateSlot();
+
+        Button_CloseUI.BindOnClickButtonEvent(Onclick_CloseGameBookUI);
+    }
+
+    public void Onclick_CloseGameBookUI()
+    {
+        DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.GameBookUI);
+    }
+
+    private void OnDisable()
+    {
+        if(_slotList.Count > 0)
+        {
+            foreach(var slotkv in _slotList)
+            {
+                var slot = slotkv.Value;
+                DestroyImmediate(slot.gameObject);
+            }
+
+            _slotList.Clear();
+        }
     }
 
     private void ReadItemListAndCreateSlot()
@@ -36,7 +62,19 @@ public class GameBookUI : DaniTechUIBase
 
             CreateGameBookSlot(data.Id);
         }
+        
+        
+        if (_slotList.Count > 0)
+        {
+            foreach(var slotkv in _slotList)
+            {
+                var slot = slotkv.Value;
+                slot.OnClick_GameBookSlot();
+            }
+        }
     }
+
+
 
 
 
@@ -55,6 +93,22 @@ public class GameBookUI : DaniTechUIBase
 
     private void OnClickChildSlotSelected(string slotDataId)
     {
-        int a = 0;
+        var currentSelectedData = DaniTechGameDataManager.Instance.GetDNItemData(slotDataId);
+        if (currentSelectedData == null) return;
+
+        //Image_MainIcon;
+        Text_MainName.text = currentSelectedData.Name;
+        Text_Descripction.text = currentSelectedData.Description;
+        //Text_SellingPrice.text = currentSelectedData.SellingPrice;
+        DaniTechGameUtil.LoadAndSetSpriteImage(Image_MainIcon, currentSelectedData.IconPath).Forget();
+
+        foreach(var slotkv in _slotList)
+        {
+            var slot = slotkv.Value;
+            var dataId = slot.GetSlotDataId();
+            slot.SetSelectedUI(slotDataId == dataId);
+
+        }
+
     }
 }

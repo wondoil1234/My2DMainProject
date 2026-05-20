@@ -8,6 +8,12 @@ public class DaniTech_MainUI : DaniTechUIBase
     [SerializeField] private DaniTechUIButton Btn_OpenInventory;
     [SerializeField] private DaniTechUIButton Btn_OpenGameBook;
 
+    [Header("스킬 버튼")]
+    [SerializeField] private DaniTechUIButton Btn_NormalAttack;
+    [SerializeField] private DaniTechUIButton Btn_Firstskill;
+    [SerializeField] private DaniTechUIButton Btn_Secondskill;
+    [SerializeField] private DaniTechUIButton Btn_Thirdskill;
+
 
     private void OnEnable()
     {
@@ -16,6 +22,34 @@ public class DaniTech_MainUI : DaniTechUIBase
         Btn_MonsterSpawn.BindOnClickButtonEvent(OnClicK_MonsterSpawn);
         Btn_OpenInventory.BindOnClickButtonEvent(OnClick_OpenInventory);
         Btn_OpenGameBook.BindOnClickButtonEvent(OnClick_OpenGameBook);
+
+
+
+        Btn_NormalAttack.BindOnClickButtonEvent(OnClick_UseNormalAttack);
+        Btn_Firstskill.BindOnClickButtonEvent(OnClick_UseFirstskill);
+        Btn_Secondskill.BindOnClickButtonEvent(OnClick_UseSecondskill);
+        Btn_Thirdskill.BindOnClickButtonEvent(OnClick_UseThirdskill);
+
+    }
+
+    public void OnClick_UseNormalAttack()
+    {
+
+    }
+
+    public void OnClick_UseFirstskill()
+    {
+
+    }
+
+    public void OnClick_UseSecondskill()
+    {
+
+    }
+
+    public void OnClick_UseThirdskill()
+    {
+
     }
 
     public void OnClick_OpenGameBook()

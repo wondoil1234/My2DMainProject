@@ -15,6 +15,11 @@ public class GameBookSlotUI : MonoBehaviour
 
     private string _SlotDataId;
 
+    public string GetSlotDataId()
+    {
+        return _SlotDataId;
+    }
+
     private void OnEnable()
     {
         Button_SlotClick.BindOnClickButtonEvent(OnClick_GameBookSlot);
@@ -48,7 +53,9 @@ public class GameBookSlotUI : MonoBehaviour
         _onclickSlot += onClickcallback;
     }
 
-    
-
+    public void SetSelectedUI(bool isSelect)
+    {
+        Gobj_Selected.SetActive(isSelect);
+    }
 
 }
