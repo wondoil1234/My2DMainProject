@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEditor.AddressableAssets.BuildReportVisualizer;
 using UnityEngine;
 
 // +) 어떤 컴포넌트가 필수로 필요하다는 것을 강제할 수 있다
@@ -28,9 +29,19 @@ public class DaniTech_2DPlayer : MonoBehaviour
     private bool _isGrounded;
     private float _horizontalInput;
     private bool _lookRight = true;
+    private bool _isSkillUsing = false;
 
     // 추후에는 이런 데이터가 저장될 수 있도록 UI에 있는 것보다 한곳으로 모여지는게 좋다
     private int _currentScore;
+
+    public enum ViewType { SideView, TopDown, Isometric  }
+    public ViewType _currentView = ViewType.SideView;
+    public Vector2 _lookDirection = Vector2.up;
+
+    private Vector2 _lastOverlapOffset;
+    private float _lastOverlapRadius;
+    private bool _isOverlapSkillVisible = false;
+
 
     void Awake()
     {
@@ -70,7 +81,6 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            ChangePlayerState(DaniTech_EntityAnimState.Atk);
             UseNormalAttack();
         }
 
@@ -115,14 +125,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     }
 
     // 에디터 뷰에서 지면 체크 범위를 시각적으로 확인
-    private void OnDrawGizmos()
-    {
-        if (_groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(_groundCheck.position, _checkRadius);
-        }
-    }
+   
 
     // 6) 적 충돌 시 처리를 해보자
     private void OnCollisionEnter2D(Collision2D collision)
@@ -159,32 +162,106 @@ public class DaniTech_2DPlayer : MonoBehaviour
         _scoreUI.AddGameScore(_currentScore);
     }
 
+    public bool CheckSillUseable(bool isShowMsg = true)
+    {
+        if(_isSkillUsing == true)
+        {
+            if(isShowMsg == true)
+            {
+                DaniTechUIManager.Instance.OpenSimplePopup("스킬이 이미 사용중입니다");
+            }
+            return false;
+        }
+
+        return true;
+    }
+
     public void UseNormalAttack()
     {
+        if (CheckSillUseable(isShowMsg:false) == false) return;
+      
+        ChangePlayerState(DaniTech_EntityAnimState.Atk);
         Collider_PlayerNormalAttack.gameObject.SetActive(true);
         StartCoroutine(CostartNormalAttack());
     }
 
     public void UseFirstskill()
     {
+        if (CheckSillUseable() == false) return;
+       
+        
+        UseOverlapSkill(new Vector2(5.0f, 0.0f), 3.0f);
 
     }
 
+    
+
     public void UseSecondskill()
     {
+        if (CheckSillUseable() == false) return;
 
     }
 
     public void UseThirdskill()
     {
+        if (CheckSillUseable() == false) return;
 
     }
 
     IEnumerator CostartNormalAttack()
     {
+        _isSkillUsing = true;
         yield return new WaitForSeconds(1.0f);
         Collider_PlayerNormalAttack.gameObject.SetActive(false);
+        _isSkillUsing = false;
+    }
 
+    private Vector2 GetAdjustedDirection(Vector2 rawDir)
+    {
+        switch (_currentView)
+        {
+            case ViewType.Isometric:
+                return new Vector2(rawDir.x - rawDir.y, (rawDir.x + rawDir.y) * 0.5f).normalized;
+
+            case ViewType.SideView:
+                return new Vector2(rawDir.x, 0).normalized;
+
+            case ViewType.TopDown:
+            default:
+                return rawDir.normalized;
+        }
+    }
+
+    public void UseOverlapSkill(Vector2 offsetPosition, float radius)
+    {
+        _lastOverlapOffset = offsetPosition;
+        _lastOverlapRadius = radius;
+
+        Vector2 adjustedDir = GetAdjustedDirection(_lookDirection);
+        Vector2 center = (Vector2)transform.position + new Vector2(adjustedDir.x * offsetPosition.x, adjustedDir.y * offsetPosition.y);
+
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(center, radius);
+
+        foreach (Collider2D col in hitColliders)
+        {
+            if (col != null && col.gameObject != this.gameObject)
+            {
+                Debug.Log($"오버랩 스킬 적중: {col.name}");
+            }
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        if (_groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(_groundCheck.position, _checkRadius);
+        }
+
+        Gizmos.color = new Color(1f, 1f, 0f, 0.5f); // 반투명 노란색
+        Vector2 adjustedDir = GetAdjustedDirection(_lookDirection);
+        Vector3 center = transform.position + new Vector3(adjustedDir.x * _lastOverlapOffset.x, adjustedDir.y * _lastOverlapOffset.y, 0);
+        Gizmos.DrawWireSphere(center, _lastOverlapRadius);
     }
 
 
