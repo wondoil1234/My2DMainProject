@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 // +) 어떤 컴포넌트가 필수로 필요하다는 것을 강제할 수 있다
 [RequireComponent(typeof(Rigidbody2D))]
@@ -16,6 +17,8 @@ public class DaniTech_2DPlayer : MonoBehaviour
     [Header("애니메이터")]
     [SerializeField] private DaniTech_2DAnimatorController AnimatorController_Entity;
 
+    [Header("스킬")]
+    [SerializeField] private Collider2D Collider_PlayerNormalAttack;
 
 
     // 우선 직접 들고 있다가 추후에 UI매니저한테 요청하도록 개선해볼 것
@@ -35,6 +38,9 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
         // 2D 캐릭터가 물리 충돌 시 회전해서 넘어지는 것 방지
         _rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        Collider_PlayerNormalAttack.gameObject.SetActive(false);
+
+
     }
 
     void Update()
@@ -65,6 +71,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             ChangePlayerState(DaniTech_EntityAnimState.Atk);
+            UseNormalAttack();
         }
 
     }
@@ -151,4 +158,34 @@ public class DaniTech_2DPlayer : MonoBehaviour
         _currentScore++;
         _scoreUI.AddGameScore(_currentScore);
     }
+
+    public void UseNormalAttack()
+    {
+        Collider_PlayerNormalAttack.gameObject.SetActive(true);
+        StartCoroutine(CostartNormalAttack());
+    }
+
+    public void UseFirstskill()
+    {
+
+    }
+
+    public void UseSecondskill()
+    {
+
+    }
+
+    public void UseThirdskill()
+    {
+
+    }
+
+    IEnumerator CostartNormalAttack()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Collider_PlayerNormalAttack.gameObject.SetActive(false);
+
+    }
+
+
 }

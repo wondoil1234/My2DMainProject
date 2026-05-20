@@ -34,21 +34,24 @@ public class DaniTech_MainUI : DaniTechUIBase
 
     public void OnClick_UseNormalAttack()
     {
-
+        DaniTechGameManager.Inst.LocalPlayer.UseNormalAttack();
     }
 
     public void OnClick_UseFirstskill()
     {
+        DaniTechGameManager.Inst.LocalPlayer.UseFirstskill();
 
     }
 
     public void OnClick_UseSecondskill()
     {
+        DaniTechGameManager.Inst.LocalPlayer.UseSecondskill();
 
     }
 
     public void OnClick_UseThirdskill()
     {
+        DaniTechGameManager.Inst.LocalPlayer.UseThirdskill();
 
     }
 
