@@ -20,6 +20,8 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
     [Header("스킬")]
     [SerializeField] private Collider2D Collider_PlayerNormalAttack;
+    [SerializeField] private GameObject prefab_SkillProjectile;
+    [SerializeField] private Transform Transform_SkillProjectileRoot;
 
 
     // 우선 직접 들고 있다가 추후에 UI매니저한테 요청하도록 개선해볼 것
@@ -205,7 +207,14 @@ public class DaniTech_2DPlayer : MonoBehaviour
     public void UseThirdskill()
     {
         if (CheckSillUseable() == false) return;
+        CreateProjectileSkillObject();
 
+    }
+
+    private void CreateProjectileSkillObject()
+    {
+       var gobj = Instantiate(prefab_SkillProjectile, Transform_SkillProjectileRoot);
+       
     }
 
     IEnumerator CostartNormalAttack()
