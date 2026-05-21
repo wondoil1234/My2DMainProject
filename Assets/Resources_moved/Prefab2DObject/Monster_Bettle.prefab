@@ -47,6 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118ec95b881fe9d41bead6e4b34cde91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameMonster
+  SkillCoolTime: 5
+  Prefab_ThisMonsterSkillObject: {fileID: 4177851725061325039, guid: 61d06f80ea70e4140adcfee8f0d3f987, type: 3}
+  _instanceId: 0
+  _dataId: 
+  _baseHp: 0
+  _baseAtk: 0
+  _isAlive: 1
 --- !u!50 &5336684423402810778
 Rigidbody2D:
   serializedVersion: 5
@@ -59,7 +66,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 5

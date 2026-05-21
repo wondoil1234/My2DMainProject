@@ -7,11 +7,12 @@ public class SkillProjectile : MonoBehaviour
 
 
     private int _damage;
+    private int _ownerInstanceId;
     
     
     private Vector3 _moveDirection = new Vector3(1, 0, 0);
     
-    public void InitSkillObject(bool isDirRight, Vector3 playerPos, int damage)
+    public void InitSkillObject(int ownerInstanceId, bool isDirRight, Vector3 playerPos, int damage)
     {
         this.transform.position = playerPos;
 
@@ -22,6 +23,7 @@ public class SkillProjectile : MonoBehaviour
         SpriteRenderer_Effect.flipY = !isDirRight;
 
         _damage = damage;
+        _ownerInstanceId = ownerInstanceId;
 
     }
 
