@@ -40,6 +40,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41a2a08dccd73ad4caed35628d6905e5
+    m_Address: 2DObject/Monster_Dino
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 43237ee419ec47b49a6349f963676aa1
     m_Address: 2DPrefab/Harvest_Potato
     m_ReadOnly: 0
@@ -60,8 +65,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c16d4eb3a7599f4ab745ef9a2db0015
+    m_Address: Icon/Icon_Dino
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 988485599ab6ecb4db508e35e6b5086a
     m_Address: Sound/Pugmia_Bgm_Housing_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b35c876453cee634192aad92a7239b22
+    m_Address: Icon/Icon_Bettle
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -77,6 +92,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d8d61a3cf509c944a9072703554e32fb
     m_Address: Sound/Voice_Pug_1_success
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e39cc9bbbc3c1444294f4e0d160ffa2e
+    m_Address: 2DObject/Monster_Bettle
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

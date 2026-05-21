@@ -16,6 +16,8 @@ public class DaniTechGameObjectManager : MonoBehaviour
     // 생성된 오브젝트의 생명을 보관
     private Dictionary<int, GameObject> _createdGameObjectContainer = new Dictionary<int, GameObject>();
     private Dictionary<int, DaniTech_2DFieldObject> _fieldObjectContainer = new Dictionary<int, DaniTech_2DFieldObject>();
+    private Dictionary<int, GameMonster> _MonsterObjectContainer = new Dictionary<int, GameMonster>();
+
 
     private void Awake()
     {
@@ -94,9 +96,30 @@ public class DaniTechGameObjectManager : MonoBehaviour
         Destroy(gObj);
     }
 
+    public async UniTaskVoid CreatMonsterObject(string monsterDataId, Transform spawnSpot)
+    {
+        var monsterData = DaniTechGameDataManager.Instance.GetDNMonsterData(monsterDataId);
+        if (monsterData == null) return;
 
+        var createdObj = await DaniTechResourceManager.Inst.InstantiateAsync(monsterData.PrefabPath, Root_Enemy, true);
+        createdObj.transform.position = spawnSpot.position;
 
+        AddMonsterObjectOnCreate(createdObj, monsterDataId);
+    }
 
+    private void AddMonsterObjectOnCreate(GameObject createdObject, string monsterDataId)
+    {
+        _objectInstanceKeyGenerator++;
+        int generatedInstanceId = _objectInstanceKeyGenerator;
+
+        var monsterComponent = createdObject.GetComponent<GameMonster>();
+        if (monsterComponent == null) return;
+
+        _MonsterObjectContainer.Add(generatedInstanceId, monsterComponent);
+
+        monsterComponent.InitMonster(generatedInstanceId, monsterDataId);
+
+    }
 
 
     //[필드 오브젝트] ====================================================================================================
