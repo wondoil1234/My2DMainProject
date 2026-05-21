@@ -3,6 +3,10 @@
     "Id": "mob_slim_1",
     "Name": "슬라이무",
     "Description": "슬라이무는 공격을 받을 때마다 딸기맛, 초코맛, 바닐라맛으로 변한다",
+    "BaseHp": null,
+    "BaseAtk": null,
+    "NormalAtkMultiple": null,
+    "SkillAtkMultipleList": null,
     "IconPath": null,
     "PrefabPath": null
   },
@@ -10,6 +14,10 @@
     "Id": "mob_dog_1",
     "Name": "도그",
     "Description": "도그는 도그다",
+    "BaseHp": null,
+    "BaseAtk": null,
+    "NormalAtkMultiple": null,
+    "SkillAtkMultipleList": null,
     "IconPath": null,
     "PrefabPath": null
   },
@@ -17,7 +25,38 @@
     "Id": "mob_pigme_1",
     "Name": "피그미",
     "Description": "피그미는 충돌하면 사라진다. 간헐적으로 금화가 터져나온다.",
+    "BaseHp": null,
+    "BaseAtk": null,
+    "NormalAtkMultiple": null,
+    "SkillAtkMultipleList": null,
     "IconPath": null,
     "PrefabPath": null
+  },
+  {
+    "Id": "mob_bettle_1",
+    "Name": "비틀",
+    "Description": "비틀이다.",
+    "BaseHp": 500,
+    "BaseAtk": 20,
+    "NormalAtkMultiple": 1,
+    "SkillAtkMultipleList": [
+      2
+    ],
+    "IconPath": "Icon/Icon_Bettle",
+    "PrefabPath": "2DObject/Monster_Bettle"
+  },
+  {
+    "Id": "mob_dino_1",
+    "Name": "공룡",
+    "Description": "공룡이다.",
+    "BaseHp": 1000,
+    "BaseAtk": 100,
+    "NormalAtkMultiple": 0.5,
+    "SkillAtkMultipleList": [
+      1.5,
+      5
+    ],
+    "IconPath": "Icon/Icon_Dino",
+    "PrefabPath": "2DObject/Monster_Dino"
   }
 ]
