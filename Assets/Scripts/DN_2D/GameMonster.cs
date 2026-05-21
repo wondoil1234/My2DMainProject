@@ -1,14 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameMonster : MonsterBase
 {
     [Header("몬스터 프리팹에서 미리 세팅할 데이터")]
     public float SkillCoolTime;
     public GameObject Prefab_ThisMonsterSkillObject;
-    
-    
-    
+    [SerializeField] private SpriteRenderer SpriteRenderer_Monster;
+
+
+
     [Header("데이터를 확인할 수 있도록 임시로 열어줌")]
     public int _instanceId;
     public string _dataId;
@@ -19,6 +23,8 @@ public class GameMonster : MonsterBase
     public int _baseAtk;
     public bool _isAlive = true;
     private bool _lookRight = true;
+    private Vector3 _moveDirection;
+
 
 
     private void OnDisable()
@@ -63,9 +69,21 @@ public class GameMonster : MonsterBase
                 break;
             }
 
+            changeMonsterDirection();
             UseSkill();
-
         }
+    }
+
+    void changeMonsterDirection()
+    {
+        _lookRight = !_lookRight;
+        _moveDirection = new Vector3(_lookRight ? 1 : -1, 0, 0);
+        SetMeshDirectionByMoveDirection((int)_moveDirection.x);
+    }
+
+    void SetMeshDirectionByMoveDirection(int x)
+    {
+        SpriteRenderer_Monster.flipX = (x < 0);
     }
 
     private void UseSkill()
