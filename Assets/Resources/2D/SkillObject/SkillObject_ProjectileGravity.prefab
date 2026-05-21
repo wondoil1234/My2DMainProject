@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 351065682347626151}
   - component: {fileID: 8087558395427055839}
   m_Layer: 0
-  m_Name: SkillObject_Projectile
+  m_Name: SkillObject_ProjectileGravity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillProjectile
   SpriteRenderer_Effect: {fileID: 7400950524066463040}
-  ProjectileSpeed: 100
 --- !u!50 &8087558395427055839
 Rigidbody2D:
   serializedVersion: 5
@@ -126,13 +125,13 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4177851725061325039}
   m_BodyType: 0
-  m_Simulated: 1
+  m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 8
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

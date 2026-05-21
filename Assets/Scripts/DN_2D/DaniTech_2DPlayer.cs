@@ -213,8 +213,14 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
     private void CreateProjectileSkillObject()
     {
-       var gobj = Instantiate(prefab_SkillProjectile, Transform_SkillProjectileRoot);
-       
+        var gObj = Instantiate(prefab_SkillProjectile, Transform_SkillProjectileRoot);
+        if (gObj == null) return;
+        var skillProjectileComponent = gObj.GetComponent<SkillProjectile>();
+        if(skillProjectileComponent == null) return;
+
+        skillProjectileComponent.InitSkillObject(_lookRight, this.transform.position, 500);
+
+
     }
 
     IEnumerator CostartNormalAttack()
