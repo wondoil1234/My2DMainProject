@@ -12,7 +12,7 @@ public class SkillProjectile : MonoBehaviour
     
     private Vector3 _moveDirection = new Vector3(1, 0, 0);
     
-    public void InitSkillObject(int ownerInstanceId, bool isDirRight, Vector3 playerPos, int damage)
+    public void InitSkillObject(int ownerInstanceId, bool isDirRight, Vector3 playerPos, int damage, string parantTag)
     {
         this.transform.position = playerPos;
 
@@ -24,6 +24,8 @@ public class SkillProjectile : MonoBehaviour
 
         _damage = damage;
         _ownerInstanceId = ownerInstanceId;
+
+        this.gameObject.tag = parantTag;
 
     }
 
@@ -45,7 +47,9 @@ public class SkillProjectile : MonoBehaviour
 
     private void CheckCollision(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        bool isOwnerPlayer = (_ownerInstanceId == 0);
+
+        if (collision.CompareTag("Player") == (isOwnerPlayer == false))
         {
             var Player = DaniTechGameObjectManager.Inst.GetLocalPlayer();
             Player.TakeDamage(_damage);

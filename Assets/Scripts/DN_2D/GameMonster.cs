@@ -95,7 +95,7 @@ public class GameMonster : MonsterBase
 
         float skillMultiple = _thisMonsterData.SkillAtkMultipleList.Count > 0 ? _thisMonsterData.SkillAtkMultipleList[0] : 0;
         int finalSkillDamage = GetFinalSkillDamage(_baseAtk, skillMultiple);
-        skillProjectileComponent.InitSkillObject(_instanceId, _lookRight, this.transform.position, finalSkillDamage);
+        skillProjectileComponent.InitSkillObject(_instanceId, _lookRight, this.transform.position, finalSkillDamage, tag);
     }
 
 
