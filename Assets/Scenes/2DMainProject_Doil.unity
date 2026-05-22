@@ -1511,8 +1511,10 @@ MonoBehaviour:
     m_Bits: 64
   AnimatorController_Entity: {fileID: 1439004688}
   Collider_PlayerNormalAttack: {fileID: 1077881587}
-  prefab_SkillProjectile: {fileID: 4177851725061325039, guid: 61d06f80ea70e4140adcfee8f0d3f987, type: 3}
+  prefab_SkillProjectile: {fileID: 4177851725061325039, guid: 59da7068f40d42b48955c0b6125aa777, type: 3}
   Transform_SkillProjectileRoot: {fileID: 2008179843}
+  _PlayerHp: 1000
+  _PlayerBaseAtk: 100
   _scoreUI: {fileID: 0}
   _currentView: 1
   _lookDirection: {x: 0, y: 0}

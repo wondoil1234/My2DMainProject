@@ -114,4 +114,18 @@ public class GameMonster : MonsterBase
         }
     }
 
+
+    public void TakeDamage(int playerdamage)
+    {
+        _baseHp -= playerdamage;
+
+
+        //spriteRenderer_Damage.gameObject.SetActive(true);
+
+        if(_baseHp < 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 }

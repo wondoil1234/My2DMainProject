@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using UnityEditor.AddressableAssets.BuildReportVisualizer;
+using UnityEngine.AddressableAssets;
 using UnityEngine;
 
 // +) 어떤 컴포넌트가 필수로 필요하다는 것을 강제할 수 있다

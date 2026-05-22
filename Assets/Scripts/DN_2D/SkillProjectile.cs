@@ -60,7 +60,7 @@ public class SkillProjectile : MonoBehaviour
     {
         bool isOwnerPlayer = (_ownerInstanceId == 0);
 
-        if (collision.CompareTag("Player") == (isOwnerPlayer == false))
+        if (collision.CompareTag("Player") && (isOwnerPlayer == false))
         {
             //var Player = DaniTechGameObjectManager.Inst.GetLocalPlayer();
             //Player.TakeDamage(_damage);
@@ -69,6 +69,20 @@ public class SkillProjectile : MonoBehaviour
             _onSkillCollision?.Invoke(0, _damage);
 
 
+            Destroy(this.gameObject);
+        }
+        else if (collision.CompareTag("Enemy") && (isOwnerPlayer))
+        {
+            var Gobj = collision.gameObject;
+            if (Gobj == null) return;
+
+            var monsterComponent = gameObject.GetComponent<GameMonster>();
+            if (monsterComponent == null) return;
+
+            monsterComponent.TakeDamage(_damage);
+            
+            
+            //_onSkillCollision?.Invoke(0, _damage);
             Destroy(this.gameObject);
         }
     }
