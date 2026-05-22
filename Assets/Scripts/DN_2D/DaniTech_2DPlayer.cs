@@ -228,9 +228,17 @@ public class DaniTech_2DPlayer : MonoBehaviour
         var skillProjectileComponent = gObj.GetComponent<SkillProjectile>();
         if(skillProjectileComponent == null) return;
 
-        skillProjectileComponent.InitSkillObject(0,_lookRight, this.transform.position, 500, tag);
+        var tag = this.gameObject.tag;
+        skillProjectileComponent.InitSkillObject(0,_lookRight, this.transform.position, 500, tag, OnMonsterCollied);
+    }
 
+    private void OnMonsterCollied(int monsterinstanceId, int skillDamage)
+    {
+        var monsterComponent = DaniTechGameObjectManager.Inst.GetMonsterObjectByInstanceId(monsterinstanceId);
+        if (monsterComponent == null) return;
 
+        Debug.LogWarning($"플레이어가 {monsterinstanceId}에 데미지 {skillDamage} 부여");
+        monsterComponent.TakeDamage(skillDamage);
     }
 
     IEnumerator CostartNormalAttack()

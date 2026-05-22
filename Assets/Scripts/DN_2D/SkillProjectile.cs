@@ -67,8 +67,6 @@ public class SkillProjectile : MonoBehaviour
 
 
             _onSkillCollision?.Invoke(0, _damage);
-
-
             Destroy(this.gameObject);
         }
         else if (collision.CompareTag("Enemy") && (isOwnerPlayer))
@@ -76,13 +74,13 @@ public class SkillProjectile : MonoBehaviour
             var Gobj = collision.gameObject;
             if (Gobj == null) return;
 
-            var monsterComponent = gameObject.GetComponent<GameMonster>();
+            var monsterComponent = Gobj.GetComponent<GameMonster>();
             if (monsterComponent == null) return;
 
-            monsterComponent.TakeDamage(_damage);
+
+            int instId = monsterComponent.GetMonsterInstanceId();
+            _onSkillCollision?.Invoke(instId, _damage);
             
-            
-            //_onSkillCollision?.Invoke(0, _damage);
             Destroy(this.gameObject);
         }
     }

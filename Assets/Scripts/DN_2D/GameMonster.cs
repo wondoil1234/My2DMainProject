@@ -48,6 +48,11 @@ public class GameMonster : MonsterBase
         StartCoroutine(CheckAndUseSkill());
     }
 
+    public int GetMonsterInstanceId()
+    {
+        return _instanceId;
+    }
+
     private int GetFinalNormalAtkDamage(int baseAtk, float normalAtkMultiple)
     {
         return GetFinalSkillDamage(baseAtk, normalAtkMultiple);
