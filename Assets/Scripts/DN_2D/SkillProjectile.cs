@@ -49,6 +49,9 @@ public class SkillProjectile : MonoBehaviour
         {
             var Player = DaniTechGameObjectManager.Inst.GetLocalPlayer();
             Player.TakeDamage(_damage);
+
+
+            Destroy(this.gameObject);
         }
     }
 
