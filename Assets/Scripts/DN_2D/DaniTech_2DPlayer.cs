@@ -23,6 +23,11 @@ public class DaniTech_2DPlayer : MonoBehaviour
     [SerializeField] private GameObject prefab_SkillProjectile;
     [SerializeField] private Transform Transform_SkillProjectileRoot;
 
+    [Header("전투 관련 정보")]
+    [SerializeField] private int _PlayerHp = 1000;
+    [SerializeField] private int _PlayerBaseAtk = 100;
+
+
 
     // 우선 직접 들고 있다가 추후에 UI매니저한테 요청하도록 개선해볼 것
     [SerializeField] private DaniTech_ScoreUI _scoreUI;
@@ -270,6 +275,33 @@ public class DaniTech_2DPlayer : MonoBehaviour
             }
         }
     }
+    
+    
+    public void TakeDamage(int damage)
+    {
+        _PlayerHp -= damage;
+        Debug.Log($"{_PlayerHp}");
+
+        if (_PlayerHp  < 0)
+        {
+            PlayerDie();
+        }
+    }
+    
+    public void PlayerDie()
+    {
+        //bool _isAlive = false;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private void OnDrawGizmos()
     {
         if (_groundCheck != null)

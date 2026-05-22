@@ -32,5 +32,24 @@ public class SkillProjectile : MonoBehaviour
         transform.position += _moveDirection * ProjectileSpeed * Time.deltaTime;
     }
 
-   
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        CheckCollision(collision);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        CheckCollision(collision.collider);
+    }
+
+    private void CheckCollision(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            var Player = DaniTechGameObjectManager.Inst.GetLocalPlayer();
+            Player.TakeDamage(_damage);
+        }
+    }
+
 }
