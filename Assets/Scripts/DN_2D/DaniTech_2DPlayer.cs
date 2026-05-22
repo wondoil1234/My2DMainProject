@@ -56,6 +56,11 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        DaniTechGameObjectManager.Inst.RegisterLocalPlayer(this);
+    }
+
     void Update()
     {
         // 1. 입력 받기 (Update에서 수행)

@@ -5,7 +5,7 @@ public class DaniTechGameManager : MonoBehaviour
 {
     public static DaniTechGameManager Inst { get; set; }
 
-    public DaniTech_2DPlayer LocalPlayer;
+    //public DaniTech_2DPlayer LocalPlayer; 
 
     // 플레이 중에 저장되어야 하는 정보들이 있는 위치
     private DaniTechPlayerModel _playerModel = new DaniTechPlayerModel();
@@ -61,5 +61,11 @@ public class DaniTechGameManager : MonoBehaviour
     {
         // _playerModel이 Private이므로 외부에서 ItemList를 받아올 수 있게 Get함수를 사용한다
         return _playerModel.ItemList;
+    }
+
+
+    public DaniTech_2DPlayer GetLocalPlayer()
+    {
+        return DaniTechGameObjectManager.Inst.GetLocalPlayer();
     }
 }
