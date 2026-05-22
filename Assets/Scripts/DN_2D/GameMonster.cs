@@ -95,8 +95,23 @@ public class GameMonster : MonsterBase
 
         float skillMultiple = _thisMonsterData.SkillAtkMultipleList.Count > 0 ? _thisMonsterData.SkillAtkMultipleList[0] : 0;
         int finalSkillDamage = GetFinalSkillDamage(_baseAtk, skillMultiple);
-        skillProjectileComponent.InitSkillObject(_instanceId, _lookRight, this.transform.position, finalSkillDamage, tag);
+        var tag = this.gameObject.tag;
+        skillProjectileComponent.InitSkillObject(_instanceId, _lookRight, this.transform.position, finalSkillDamage, tag , onSkillCollision);
     }
 
+    private void onSkillCollision(int colliedObjectinstanceId, int damage)
+    {
+        if(colliedObjectinstanceId ==0)
+        {
+            var Player = DaniTechGameObjectManager.Inst.GetLocalPlayer();
+
+            //float skillMultiple = _thisMonsterData.SkillAtkMultipleList.Count > 0 ? _thisMonsterData.SkillAtkMultipleList[0] : 0;
+            //int finalSkillDamage = GetFinalSkillDamage(_baseAtk, skillMultiple);
+
+
+
+            Player.TakeDamage(damage);
+        }
+    }
 
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class SkillProjectile : MonoBehaviour
 {
@@ -11,11 +12,18 @@ public class SkillProjectile : MonoBehaviour
     
     
     private Vector3 _moveDirection = new Vector3(1, 0, 0);
-    
-    public void InitSkillObject(int ownerInstanceId, bool isDirRight, Vector3 playerPos, int damage, string parantTag)
+
+    private event Action<int,int> _onSkillCollision;
+
+    private void OnDisable()
+    {
+        _onSkillCollision = null;
+    }
+
+
+    public void InitSkillObject(int ownerInstanceId, bool isDirRight, Vector3 playerPos, int damage, string parantTag, Action<int,int> onSkillCollision = null)
     {
         this.transform.position = playerPos;
-
 
 
         _moveDirection = isDirRight ? new Vector3(1, 0, 0) : new Vector3(-1, 0, 0);
@@ -24,6 +32,9 @@ public class SkillProjectile : MonoBehaviour
 
         _damage = damage;
         _ownerInstanceId = ownerInstanceId;
+
+
+        _onSkillCollision = onSkillCollision;
 
         this.gameObject.tag = parantTag;
 
@@ -51,8 +62,11 @@ public class SkillProjectile : MonoBehaviour
 
         if (collision.CompareTag("Player") == (isOwnerPlayer == false))
         {
-            var Player = DaniTechGameObjectManager.Inst.GetLocalPlayer();
-            Player.TakeDamage(_damage);
+            //var Player = DaniTechGameObjectManager.Inst.GetLocalPlayer();
+            //Player.TakeDamage(_damage);
+
+
+            _onSkillCollision?.Invoke(0, _damage);
 
 
             Destroy(this.gameObject);
