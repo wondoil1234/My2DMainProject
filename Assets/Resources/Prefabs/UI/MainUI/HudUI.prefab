@@ -27,7 +27,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5195269558637345351}
   m_Father: {fileID: 1617168635758334589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -65,7 +66,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 265364403608403254}
-  - {fileID: 5195269558637345351}
   - {fileID: 6616284960123586820}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HudUI
   prefab_HudSlot: {fileID: 3615717347966296091, guid: 93685ef034eb64049813eb92e5f22029, type: 3}
+  Transform_SlotRoot: {fileID: 265364403608403254}
 --- !u!1 &5962805456336310780
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +169,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1617168635758334589}
+    m_TransformParent: {fileID: 265364403608403254}
     m_Modifications:
     - target: {fileID: 1613480013501807078, guid: 93685ef034eb64049813eb92e5f22029, type: 3}
       propertyPath: m_Pivot.x

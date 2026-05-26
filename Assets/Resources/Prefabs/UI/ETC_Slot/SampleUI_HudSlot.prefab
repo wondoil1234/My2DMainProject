@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 449315539984046271}
   - component: {fileID: 7597155189982790281}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Text_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -31.800003, y: -32.50001}
+  m_AnchoredPosition: {x: -31.799942, y: -32.50001}
   m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &449315539984046271
@@ -517,6 +517,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8a398c8c68a2e4997e15ce8fe1c484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HudSlotUI
+  SlotoffsetY: 0
+  LayOut_TextArea: {fileID: 7394853572641604361}
+  Text_Name: {fileID: 7597155189982790281}
+  slider_Hp: {fileID: 6194760370797932064}
+  slider_Mp: {fileID: 4957017364369859954}
 --- !u!1 &5007049084092994741
 GameObject:
   m_ObjectHideFlags: 0

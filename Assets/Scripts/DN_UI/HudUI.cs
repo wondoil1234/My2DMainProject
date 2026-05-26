@@ -20,15 +20,22 @@ public class HudUI : DaniTechUIBase
         var Gobj = Instantiate(prefab_HudSlot, Transform_SlotRoot);
         if (Gobj == null) return;
 
-        var SlotComponent = Gobj.GetComponent<HudSlotUI>();
-        if (SlotComponent == null) return;
+        var slotComponent = Gobj.GetComponent<HudSlotUI>();
+        if (slotComponent == null) return;
 
-        SlotComponent.InitSlot(instanceId, targettransform);
-        _hudslotList.Add(instanceId, SlotComponent);
+        slotComponent.InitSlot(instanceId, targettransform);
+        _hudslotList.Add(instanceId, slotComponent);
     }
 
-    public void RemoveHudSlot()
+    public void RemoveHudSlot(int instanceId)
     {
+        if( _hudslotList.ContainsKey(instanceId) == true)
+        {
+            var slot = _hudslotList[instanceId]; 
 
+            Destroy(slot.gameObject);
+
+            _hudslotList.Remove(instanceId);
+        }
     }
 }

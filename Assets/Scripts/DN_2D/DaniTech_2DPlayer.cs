@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine.AddressableAssets;
 using UnityEngine;
+using System;
 
 // +) 어떤 컴포넌트가 필수로 필요하다는 것을 강제할 수 있다
 [RequireComponent(typeof(Rigidbody2D))]
@@ -24,6 +25,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     [SerializeField] private Transform Transform_SkillProjectileRoot;
 
     [Header("전투 관련 정보")]
+    [SerializeField] private int _maxHp;
     [SerializeField] private int _PlayerHp = 1000;
     [SerializeField] private int _PlayerBaseAtk = 100;
 
@@ -49,6 +51,9 @@ public class DaniTech_2DPlayer : MonoBehaviour
     private float _lastOverlapRadius;
     private bool _isOverlapSkillVisible = false;
 
+    private event Action<int, int> _onHpChanged;
+    private event Action<int, int> _onMpChanged;
+
 
     void Awake()
     {
@@ -58,12 +63,14 @@ public class DaniTech_2DPlayer : MonoBehaviour
         _rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         Collider_PlayerNormalAttack.gameObject.SetActive(false);
 
-
+        _PlayerHp = 1000;
+        _maxHp = _PlayerHp;
     }
 
     private void Start()
     {
         DaniTechGameObjectManager.Inst.RegisterLocalPlayer(this);
+        DaniTechUIManager.Instance.AddHudSlot(0, this.gameObject.transform);
         
     }
 
@@ -292,9 +299,11 @@ public class DaniTech_2DPlayer : MonoBehaviour
         _PlayerHp -= damage;
         Debug.Log($"{_PlayerHp}");
 
+        InvokestatchangedEvent();
         if (_PlayerHp  < 0)
         {
             PlayerDie();
+            DaniTechUIManager.Instance.RemoveHudSlot(0);
         }
     }
     
@@ -303,11 +312,23 @@ public class DaniTech_2DPlayer : MonoBehaviour
         //bool _isAlive = false;
     }
     
+    public void BindOnstatChangedEvent(Action<int, int> hpChangeCallback, Action<int, int> mpChangeCallback)
+    {
+        _onHpChanged += hpChangeCallback;
+        _onMpChanged += mpChangeCallback;
+    }
     
+    public void ResetStartChangedEvent()
+    {
+        _onHpChanged = null;
+        _onMpChanged = null;
+    }
     
-    
-    
-    
+    private void InvokestatchangedEvent()
+    {
+        _onHpChanged?.Invoke(_PlayerHp, _maxHp);
+        //_onMpChanged?.Invoke(_PlayerMp);
+    }
     
     
     
