@@ -239,6 +239,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
 
         Debug.LogWarning($"플레이어가 {monsterinstanceId}에 데미지 {skillDamage} 부여");
         monsterComponent.TakeDamage(skillDamage);
+        monsterComponent.UseSkill();
     }
 
     IEnumerator CostartNormalAttack()

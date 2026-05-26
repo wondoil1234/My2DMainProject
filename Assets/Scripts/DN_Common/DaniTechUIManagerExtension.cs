@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks.Triggers;
+using UnityEngine;
 
 public enum DaniTechUIRootType
 {
@@ -20,7 +21,8 @@ public enum DaniTechUIType
     DNDialogueUI,
     DNInfoBookUI,
     RobbyUI,
-    GameBookUI
+    GameBookUI,
+    HudUI
 }
 
 public static class DaniTechUIManagerExtension
@@ -39,6 +41,7 @@ public static class DaniTechUIManagerExtension
     {
         uiManager.OpenLoadingUI();
         uiManager.OpenContentUI(DaniTechUIType.RobbyUI);
+        uiManager.OpenUI(DaniTechUIRootType.MainUI, DaniTechUIType.HudUI);
         uiManager.OpenUI(DaniTechUIRootType.MainUI, DaniTechUIType.DNMainUI);
         // 게임 로비 UI를 여기서 오픈해주자 -> uiManager.
         // MainUI도
@@ -114,6 +117,34 @@ public static class DaniTechUIManagerExtension
         if (uiBase is DaniTech_DialogueUI dialogueUi)
         {
             dialogueUi.StartDialogue(startDialogueId);
+        }
+    }
+
+    public static void AddHudSlot(this DaniTechUIManager uiManager, int instanceId)
+    {
+        var uiBase = uiManager.GetOpendUI(DaniTechUIRootType.MainUI, DaniTechUIType.HudUI);
+        if (uiBase == null) return;
+
+        if(uiBase is HudUI hudUI)
+        {
+            // 그 대상이 생성됬을 때 호출
+
+
+            hudUI.AddHudSlot(instanceId);
+        }
+    }
+
+    public static void RemoveHudSlot(this DaniTechUIManager uiManager)
+    {
+        // 그 대상이 죽었을때 호출
+        var uiBase = uiManager.GetOpendUI(DaniTechUIRootType.MainUI, DaniTechUIType.HudUI);
+        if (uiBase == null) return;
+
+        if (uiBase is HudUI hudUI)
+        {
+
+
+            hudUI.RemoveHudSlot();
         }
     }
 }

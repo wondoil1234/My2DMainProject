@@ -91,7 +91,7 @@ public class GameMonster : MonsterBase
         SpriteRenderer_Monster.flipX = (x < 0);
     }
 
-    private void UseSkill()
+    public void UseSkill()
     {
         var gObj = Instantiate(Prefab_ThisMonsterSkillObject, DaniTechGameObjectManager.Inst.transform);
         if (gObj == null) return;

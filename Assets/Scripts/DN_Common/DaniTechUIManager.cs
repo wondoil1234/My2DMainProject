@@ -95,6 +95,11 @@ public class DaniTechUIManager : MonoBehaviour
         }
     }
 
+    public DaniTechUIBase GetOpendUI(DaniTechUIRootType uIRootType, DaniTechUIType uiType)
+    {
+        return GetCreatedUI(uIRootType, uiType);
+    }
+
     private DaniTechUIBase GetCreatedUI(DaniTechUIRootType uiRootType, DaniTechUIType uiType)
     {
         if (_createdUIDic.ContainsKey(uiType) == false)
