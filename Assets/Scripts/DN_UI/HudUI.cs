@@ -10,12 +10,12 @@ public class HudUI : DaniTechUIBase
     private Dictionary<int, HudSlotUI> _hudslotList = new Dictionary<int, HudSlotUI>();
 
 
-    public void AddHudSlot(int instanceId)
+    public void AddHudSlot(int instanceId,Transform targettransform)
     {
-        CreatedHudSlot(instanceId);
+        CreatedHudSlot(instanceId, targettransform);
     }
 
-    private void CreatedHudSlot(int instanceId)
+    private void CreatedHudSlot(int instanceId, Transform targettransform)
     {
         var Gobj = Instantiate(prefab_HudSlot, Transform_SlotRoot);
         if (Gobj == null) return;
@@ -23,7 +23,7 @@ public class HudUI : DaniTechUIBase
         var SlotComponent = Gobj.GetComponent<HudSlotUI>();
         if (SlotComponent == null) return;
 
-        //SlotComponent.InitSlot(dataId, OnClickChildSlotSelected);
+        SlotComponent.InitSlot(instanceId, targettransform);
         _hudslotList.Add(instanceId, SlotComponent);
     }
 

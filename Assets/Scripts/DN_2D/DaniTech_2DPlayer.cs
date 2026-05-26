@@ -64,6 +64,7 @@ public class DaniTech_2DPlayer : MonoBehaviour
     private void Start()
     {
         DaniTechGameObjectManager.Inst.RegisterLocalPlayer(this);
+        
     }
 
     void Update()

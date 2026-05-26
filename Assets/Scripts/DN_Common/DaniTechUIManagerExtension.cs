@@ -120,7 +120,7 @@ public static class DaniTechUIManagerExtension
         }
     }
 
-    public static void AddHudSlot(this DaniTechUIManager uiManager, int instanceId)
+    public static void AddHudSlot(this DaniTechUIManager uiManager, int instanceId, Transform targettransform)
     {
         var uiBase = uiManager.GetOpendUI(DaniTechUIRootType.MainUI, DaniTechUIType.HudUI);
         if (uiBase == null) return;
@@ -130,7 +130,7 @@ public static class DaniTechUIManagerExtension
             // 그 대상이 생성됬을 때 호출
 
 
-            hudUI.AddHudSlot(instanceId);
+            hudUI.AddHudSlot(instanceId, targettransform);
         }
     }
 
