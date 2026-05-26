@@ -17,7 +17,7 @@ public class HudSlotUI : MonoBehaviour
     {
         _instanceId = instanceId;
         _targetTransform = targetTransform;
-        SlotoffsetY = 120;
+        SlotoffsetY = 50;
 
         TryBindstatChangedEvent(targetTransform.gameObject);
     }
@@ -51,18 +51,17 @@ public class HudSlotUI : MonoBehaviour
 
     private void Update()
     {
-        if(_targetTransform != null)
+        if (_targetTransform != null)
         {
-            // this.gameObject.transform.position = _targetTransform.position;
+            Vector3 worldPos = _targetTransform.position;
 
-            Vector2 screenPos = Camera.main.WorldToScreenPoint(_targetTransform.position);
+            worldPos.y -= 0.6f;
 
-            var rectTransform = this.GetComponent<RectTransform>();
-            if(rectTransform != null)
-            {
-                Vector2 finamScreenPos = new Vector2(screenPos.x, screenPos.y - SlotoffsetY);
-                rectTransform.anchoredPosition = finamScreenPos;
-            }
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
+            if (screenPos.z < 0) return;
+
+            this.transform.position = screenPos;
         }
     }
 
