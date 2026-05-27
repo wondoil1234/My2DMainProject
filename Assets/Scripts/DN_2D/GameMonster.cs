@@ -35,6 +35,7 @@ public class GameMonster : MonsterBase
     private void OnDisable()
     {
         _isAlive = false;
+        ResetStartChangedEvent();
     }
 
     public void InitMonster(int instanceId, string dataId)

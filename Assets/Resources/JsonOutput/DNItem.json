@@ -7,7 +7,13 @@
     "Grade": "Normal",
     "MaxStackCount": 20,
     "SellingPrice": 100,
-    "IconPath": "Icon/Icon_Item_Box_1"
+    "IconPath": "Icon/Icon_Item_Box_1",
+    "UseItemType": "RandomItemBox",
+    "UseItemParameter": [
+      "Item_Equip_Hat_1:1",
+      "Item_Corn_1:20",
+      "Item_Gold_1:100"
+    ]
   },
   {
     "Id": "Item_Gold_1",
@@ -17,7 +23,9 @@
     "Grade": "Legend",
     "MaxStackCount": 1000,
     "SellingPrice": 1000,
-    "IconPath": "Icon/Icon_Item_Gold_1"
+    "IconPath": "Icon/Icon_Item_Gold_1",
+    "UseItemType": null,
+    "UseItemParameter": null
   },
   {
     "Id": "Item_Equip_Hat_1",
@@ -27,7 +35,11 @@
     "Grade": "Epic",
     "MaxStackCount": 0,
     "SellingPrice": 1,
-    "IconPath": "Icon/Icon_Item_Equip_Hat_1"
+    "IconPath": "Icon/Icon_Item_Equip_Hat_1",
+    "UseItemType": "StatChangeAtk",
+    "UseItemParameter": [
+      "700"
+    ]
   },
   {
     "Id": "Item_Corn_1",
@@ -37,7 +49,11 @@
     "Grade": "Normal",
     "MaxStackCount": 100,
     "SellingPrice": 20,
-    "IconPath": "Icon/Icon_Item_Corn"
+    "IconPath": "Icon/Icon_Item_Corn",
+    "UseItemType": "StatChangeHp",
+    "UseItemParameter": [
+      "20"
+    ]
   },
   {
     "Id": "Item_Potato_1",
@@ -47,6 +63,10 @@
     "Grade": "Normal",
     "MaxStackCount": 20,
     "SellingPrice": 100,
-    "IconPath": "Icon/Icon_Item_Box_1"
+    "IconPath": "Icon/Icon_Item_Box_1",
+    "UseItemType": "SummonMonster",
+    "UseItemParameter": [
+      "mob_bettle_1:2"
+    ]
   }
 ]

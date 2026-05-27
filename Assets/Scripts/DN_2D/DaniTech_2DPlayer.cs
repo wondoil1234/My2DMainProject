@@ -74,6 +74,11 @@ public class DaniTech_2DPlayer : MonoBehaviour
         
     }
 
+    private void OnDisable()
+    {
+        ResetStartChangedEvent();
+    }
+
     void Update()
     {
         // 1. 입력 받기 (Update에서 수행)
