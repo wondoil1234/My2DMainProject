@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 208965479850017380}
   - component: {fileID: 3367850852224106352}
   m_Layer: 5
-  m_Name: Button_TestCreateSlot
+  m_Name: Button_UseItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -540,7 +540,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 625, y: 227}
+  m_AnchoredPosition: {x: 622, y: -361.81}
   m_SizeDelta: {x: 260, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3367850852224106352

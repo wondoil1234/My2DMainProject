@@ -61,6 +61,8 @@ public class HudSlotUI : MonoBehaviour
 
             if (screenPos.z < 0) return;
 
+            screenPos.x -= 45f;
+
             this.transform.position = screenPos;
         }
     }
