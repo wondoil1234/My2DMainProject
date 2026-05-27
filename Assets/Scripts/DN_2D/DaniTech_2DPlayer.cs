@@ -353,4 +353,16 @@ public class DaniTech_2DPlayer : MonoBehaviour
     }
 
 
+    public void AddHp(int hp)
+    {
+        _PlayerHp += hp;
+        InvokestatchangedEvent();
+    }
+
+    public void AddAtk(int atk)
+    {
+        _PlayerBaseAtk += atk;
+    }
+
+
 }
