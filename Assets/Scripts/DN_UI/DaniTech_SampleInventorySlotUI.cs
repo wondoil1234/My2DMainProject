@@ -16,6 +16,7 @@ public class DaniTech_SampleInventorySlotUI : MonoBehaviour
     private event Action<int> OnSelectEvent;
 
     public int SlotInstanceId { get; private set; }
+    public bool IsUsableItem { get; private set; }
 
     private void OnEnable()
     {
@@ -38,6 +39,8 @@ public class DaniTech_SampleInventorySlotUI : MonoBehaviour
             Debug.LogWarning($"Item 데이터에 아이콘 경로가 존재하지 않습니다.");
             return;
         }
+
+        IsUsableItem = (string.IsNullOrEmpty(itemData.UseItemType) == false);
 
         // + Addressable을 적용하면서 비동기로 바뀌었다
         //DaniTechResourceManager.Inst.LoadSprite(iconPath, (sprite) => {

@@ -9,7 +9,7 @@
     "SellingPrice": 100,
     "IconPath": "Icon/Icon_Item_Box_1",
     "UseItemType": "RandomItemBox",
-    "UseItemParameter": [
+    "UseItemParameterList": [
       "Item_Equip_Hat_1:1",
       "Item_Corn_1:20",
       "Item_Gold_1:100"
@@ -25,7 +25,7 @@
     "SellingPrice": 1000,
     "IconPath": "Icon/Icon_Item_Gold_1",
     "UseItemType": null,
-    "UseItemParameter": null
+    "UseItemParameterList": null
   },
   {
     "Id": "Item_Equip_Hat_1",
@@ -37,7 +37,7 @@
     "SellingPrice": 1,
     "IconPath": "Icon/Icon_Item_Equip_Hat_1",
     "UseItemType": "StatChangeAtk",
-    "UseItemParameter": [
+    "UseItemParameterList": [
       "700"
     ]
   },
@@ -51,7 +51,7 @@
     "SellingPrice": 20,
     "IconPath": "Icon/Icon_Item_Corn",
     "UseItemType": "StatChangeHp",
-    "UseItemParameter": [
+    "UseItemParameterList": [
       "20"
     ]
   },
@@ -65,7 +65,7 @@
     "SellingPrice": 100,
     "IconPath": "Icon/Icon_Item_Box_1",
     "UseItemType": "SummonMonster",
-    "UseItemParameter": [
+    "UseItemParameterList": [
       "mob_bettle_1:2"
     ]
   }

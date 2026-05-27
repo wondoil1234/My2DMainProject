@@ -6,7 +6,7 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 {
     [SerializeField] private GameObject Prefab_Slot;
     [SerializeField] private Transform Transform_UISlotRoot;
-    [SerializeField] private DaniTechUIButton Button_CreateSlot;
+    [SerializeField] private DaniTechUIButton Button_UseSelectItem;
     [SerializeField] private DaniTechUIButton Button_CloseSelf;
     [SerializeField] private DaniTechUIButton Button_CloseSelfAllArea;
 
@@ -16,10 +16,12 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 
     private void OnEnable()
     {
-        Button_CreateSlot.BindOnClickButtonEvent(OnClick_CreateSlotTest);
+        Button_UseSelectItem.BindOnClickButtonEvent(OnClick_UseSelectItem);
         Button_CloseSelf.BindOnClickButtonEvent(OnClick_ClosePopup);
         Button_CloseSelfAllArea.BindOnClickButtonEvent(OnClick_ClosePopup);
         SetInventoryItemSlotOnEnable();
+
+        Button_UseSelectItem.gameObject.SetActive(false);
     }
 
     private void SetInventoryItemSlotOnEnable()
@@ -61,8 +63,10 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
     }
 
 
-    public void OnClick_CreateSlotTest()
+    public void OnClick_UseSelectItem()
     {
+        
+        
         // CreateSlot();
     }
 
@@ -96,7 +100,13 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
             var slot = slotKv.Value;
             bool isSlotSelected = (selectedSlotInstanceId == slot.SlotInstanceId);
             slot.ChangeSelectedState(isSlotSelected);
+
+            if(isSlotSelected == true)
+            {
+                Button_UseSelectItem.gameObject.SetActive(slot.IsUsableItem);
+            }
         }
+
 
         Debug.LogWarning($"자식 슬롯 {selectedSlotInstanceId} 선택됨!");
     }
