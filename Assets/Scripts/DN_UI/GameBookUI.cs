@@ -41,7 +41,7 @@ public class GameBookUI : DaniTechUIBase
 
     private void OnEnable()
     {
-        ReadItemListAndCreateSlot();
+        Onclick_ItemCategory();
 
         Button_CloseUI.BindOnClickButtonEvent(Onclick_CloseGameBookUI);
         Button_ItemCategory.BindOnClickButtonEvent(Onclick_ItemCategory);
@@ -89,10 +89,13 @@ public class GameBookUI : DaniTechUIBase
         switch (category)
         {
             case EgameBookCategory.ItemCategory:
+                ReadItemListAndCreateSlot();
                 break;
             case EgameBookCategory.MonsterCategory:
+                ReadMonsterListAndCreateSlot();
                 break;
             case EgameBookCategory.HarvestCategory:
+                ReadHarvestListAndCreateSlot();
                 break;
             default:
                 break;
@@ -110,7 +113,7 @@ public class GameBookUI : DaniTechUIBase
             var data = datakv.Value;
             if(data == null) continue;
 
-            CreateGameBookSlot(data.Id);
+            CreateGameBookSlot(data.Id, EgameBookCategory.ItemCategory);
         }
         
         
@@ -124,7 +127,52 @@ public class GameBookUI : DaniTechUIBase
         }
     }
 
-    private void CreateGameBookSlot(string dataId)
+
+    private void ReadMonsterListAndCreateSlot()
+    {
+        var DatList = DaniTechGameDataManager.Instance.MonsterDataList;
+        foreach (var datakv in DatList)
+        {
+            var data = datakv.Value;
+            if (data == null) continue;
+
+            CreateGameBookSlot(data.Id, EgameBookCategory.MonsterCategory);
+        }
+
+
+        if (_slotList.Count > 0)
+        {
+            foreach (var slotkv in _slotList)
+            {
+                var slot = slotkv.Value;
+                slot.OnClick_GameBookSlot();
+            }
+        }
+    }
+
+    private void ReadHarvestListAndCreateSlot()
+    {
+        var DatList = DaniTechGameDataManager.Instance.FieldObjectDataList;
+        foreach (var datakv in DatList)
+        {
+            var data = datakv.Value;
+            if (data == null) continue;
+
+            CreateGameBookSlot(data.Id, EgameBookCategory.HarvestCategory);
+        }
+
+
+        if (_slotList.Count > 0)
+        {
+            foreach (var slotkv in _slotList)
+            {
+                var slot = slotkv.Value;
+                slot.OnClick_GameBookSlot();
+            }
+        }
+    }
+
+    private void CreateGameBookSlot(string dataId, EgameBookCategory curCategory)
     {
         var Gobj = Instantiate(Prefab_Slot, Transform_SlotRoot);
         if (Gobj == null) return;
@@ -132,7 +180,7 @@ public class GameBookUI : DaniTechUIBase
         var SlotComponent = Gobj.GetComponent<GameBookSlotUI>();
         if (SlotComponent == null) return;
 
-        SlotComponent.InitSlot(dataId, OnClickChildSlotSelected);
+        SlotComponent.InitSlot(dataId, curCategory,OnClickChildSlotSelected);
         _slotList.Add(dataId, SlotComponent);
 
     }

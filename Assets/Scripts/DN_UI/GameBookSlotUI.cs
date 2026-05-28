@@ -36,18 +36,47 @@ public class GameBookSlotUI : MonoBehaviour
     }
 
 
-    public void InitSlot(string dataId, Action<string> onClickcallback) 
+    public void InitSlot(string dataId, EgameBookCategory curCategory, Action<string> onClickcallback) 
     {
-        var itemData = DaniTechGameDataManager.Instance.GetDNItemData(dataId);
-        if (itemData == null) return;
+        if(curCategory == EgameBookCategory.ItemCategory)
+        {
+            var itemData = DaniTechGameDataManager.Instance.GetDNItemData(dataId);
+            if (itemData == null) return;
 
-        Text_MainName.text = itemData.Name;
+            Text_MainName.text = itemData.Name;
 
-        string iconpath = itemData.IconPath;
-        if(string.IsNullOrEmpty(iconpath) == true) return;
+            string iconpath = itemData.IconPath;
+            if (string.IsNullOrEmpty(iconpath) == true) return;
 
-        DaniTechGameUtil.LoadAndSetSpriteImage(Image_MainIcon, iconpath).Forget();
-        
+            DaniTechGameUtil.LoadAndSetSpriteImage(Image_MainIcon, iconpath).Forget();
+        }
+        else if(curCategory == EgameBookCategory.MonsterCategory)
+        {
+            var MonsterData = DaniTechGameDataManager.Instance.GetDNMonsterData(dataId);
+            if (MonsterData == null) return;
+
+            Text_MainName.text = MonsterData.Name;
+
+            string iconpath = MonsterData.IconPath;
+            if (string.IsNullOrEmpty(iconpath) == true) return;
+
+            DaniTechGameUtil.LoadAndSetSpriteImage(Image_MainIcon, iconpath).Forget();
+
+        }
+        else if(curCategory == EgameBookCategory.HarvestCategory)
+        {
+            var FieldObjectData = DaniTechGameDataManager.Instance.GetDNFieldObjectData(dataId);
+            if (FieldObjectData == null) return;
+            if (FieldObjectData.FieldObjectType != "Harvest") return;
+
+            Text_MainName.text = FieldObjectData.Name;
+
+            string iconpath = FieldObjectData.IconPath;
+            if (string.IsNullOrEmpty(iconpath) == true) return;
+
+            DaniTechGameUtil.LoadAndSetSpriteImage(Image_MainIcon, iconpath).Forget();
+        }
+
         _SlotDataId = dataId;
 
         _onclickSlot += onClickcallback;
