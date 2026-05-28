@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4293650371050967244}
   - component: {fileID: 5336684423402810778}
   - component: {fileID: 1874681594026397106}
-  m_Layer: 0
+  - component: {fileID: 8492327332120502024}
+  m_Layer: 7
   m_Name: Monster_Bettle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1113892166969296485}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6, y: -2.06, z: -2.2}
+  m_LocalPosition: {x: -1.6, y: -2.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -63,14 +64,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113892166969296485}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -80,7 +81,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1874681594026397106
 BoxCollider2D:
@@ -126,8 +127,21 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7984496, y: 1.1396129}
+  m_Size: {x: 0.59, y: 0.63}
   m_EdgeRadius: 0
+--- !u!114 &8492327332120502024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113892166969296485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d856592eeef99644490ad7f42ac47604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterMove
+  speed: 3
 --- !u!1 &2944356783977162841
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +153,7 @@ GameObject:
   - component: {fileID: 2420435343989445246}
   - component: {fileID: 6627811897836811848}
   - component: {fileID: 2976081829499536530}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
