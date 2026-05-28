@@ -4,6 +4,14 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System;
 
+public enum EgameBookCategory
+{
+    None = 0,
+    ItemCategory,
+    MonsterCategory,
+    HarvestCategory
+}
+
 
 public class GameBookUI : DaniTechUIBase
 {
@@ -14,6 +22,11 @@ public class GameBookUI : DaniTechUIBase
     [SerializeField] private Image Image_MainIcon;
     [SerializeField] private Text Text_MainName;
     [SerializeField] private Text Text_Descripction;
+
+    [Header("상단 카테고리")]
+    [SerializeField] private DaniTechUIButton Button_ItemCategory;
+    [SerializeField] private DaniTechUIButton Button_MonsterCategory;
+    [SerializeField] private DaniTechUIButton Button_HarvestCategory;
 
     [SerializeField] private DaniTechUIButton Button_CloseUI;
 
@@ -31,13 +44,12 @@ public class GameBookUI : DaniTechUIBase
         ReadItemListAndCreateSlot();
 
         Button_CloseUI.BindOnClickButtonEvent(Onclick_CloseGameBookUI);
+        Button_ItemCategory.BindOnClickButtonEvent(Onclick_ItemCategory);
+        Button_MonsterCategory.BindOnClickButtonEvent(Onclick_MonsterCategory);
+        Button_HarvestCategory.BindOnClickButtonEvent(Onclick_HarvestCategory);
     }
 
-    public void Onclick_CloseGameBookUI()
-    {
-        DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.GameBookUI);
-    }
-
+   
     private void OnDisable()
     {
         if(_slotList.Count > 0)
@@ -51,6 +63,44 @@ public class GameBookUI : DaniTechUIBase
             _slotList.Clear();
         }
     }
+
+    public void Onclick_CloseGameBookUI()
+    {
+        DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.GameBookUI);
+    }
+
+    public void Onclick_ItemCategory()
+    {
+        SetGameBookLayoutByCategory(EgameBookCategory.ItemCategory);
+    }
+
+    public void Onclick_MonsterCategory()
+    {
+        SetGameBookLayoutByCategory(EgameBookCategory.MonsterCategory);
+    }
+
+    public void Onclick_HarvestCategory()
+    {
+        SetGameBookLayoutByCategory(EgameBookCategory.HarvestCategory);
+    }
+
+    private void SetGameBookLayoutByCategory(EgameBookCategory category)
+    {
+        switch (category)
+        {
+            case EgameBookCategory.ItemCategory:
+                break;
+            case EgameBookCategory.MonsterCategory:
+                break;
+            case EgameBookCategory.HarvestCategory:
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
 
     private void ReadItemListAndCreateSlot()
     {
@@ -73,10 +123,6 @@ public class GameBookUI : DaniTechUIBase
             }
         }
     }
-
-
-
-
 
     private void CreateGameBookSlot(string dataId)
     {
