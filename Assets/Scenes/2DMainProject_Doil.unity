@@ -327,6 +327,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RobbyUI
       objectReference: {fileID: 0}
+    - target: {fileID: 366795890388859388, guid: 752cff01670cd9344a4e9a6d8514ba1f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6791440763942583202, guid: 752cff01670cd9344a4e9a6d8514ba1f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
