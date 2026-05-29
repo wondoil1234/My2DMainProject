@@ -39,20 +39,15 @@ public class Arrow : MonoBehaviour
     // ★ [피격 판정] 화살의 Is Trigger 콜라이더가 무언가와 부딪혔을 때 유니티가 자동으로 실행하는 함수
     void OnTriggerEnter2D(Collider2D other)
     {
-        // 1. 부딪힌 상대방의 태그가 "Enemy"인지 확인
         if (other.CompareTag("Enemy"))
         {
-            // 2. 상대방 오브젝트에서 방금 수정했던 몬스터 스크립트를 찾아옵니다.
-            // (※ 본인의 진짜 몬스터 스크립트 이름이 GameMonster라면 그대로 두고, MonsterMove라면 이름을 바꿔주세요!)
-            GameMonster monster = other.GetComponent<GameMonster>();
+            GameMonster monster = other.GetComponentInParent<GameMonster>();
 
             if (monster != null)
             {
-                // 3. 몬스터의 대미지 함수를 실행하면서 화살의 대미지(예: 1)를 전달합니다.
                 monster.TakeDamage(damage);
             }
 
-            // 4. 임무를 다한 화살은 화면에서 지웁니다.
             Destroy(gameObject);
         }
     }

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113892166969296485}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 118ec95b881fe9d41bead6e4b34cde91, type: 3}
   m_Name: 
@@ -142,6 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterMove
   speed: 3
+  _instanceId: 0
+  _baseHp: 50
+  _isAlive: 1
 --- !u!1 &2944356783977162841
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +158,7 @@ GameObject:
   - component: {fileID: 2976081829499536530}
   m_Layer: 7
   m_Name: Sprite_Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
