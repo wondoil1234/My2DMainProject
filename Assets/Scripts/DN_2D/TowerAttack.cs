@@ -18,15 +18,34 @@ public class TowerAttack : MonoBehaviour
 
     void Update()
     {
-        // 사거리 내에 있는 가장 가까운 몬스터 찾기
+        // 1. 사거리 내에 있는 가장 가까운 몬스터 찾기
         Transform targetMonster = FindTarget();
 
+        // ====================================================================
+        // 🚨 [허공 공격 방어벽 코드 추가]
+        // 몬스터를 찾았더라도, (0,0,0)에 유령처럼 스쳐 지나간 녀석인지 확인하기 위해
+        // 타워와 몬스터 사이의 진짜 거리를 미터(m) 단위로 계산합니다.
+        // ====================================================================
+        if (targetMonster != null)
+        {
+            float distance = Vector3.Distance(transform.position, targetMonster.position);
+
+            // 계산한 실제 거리가 타워의 사거리(attackCooldown 위에 선언되어 있을 attackRange 등)보다 멀다면?
+            // (※ 만약 사거리 변수 이름이 attackRange가 아니라면 본인 스크립트에 적힌 사거리 변수명으로 고쳐주세요!)
+            float myAttackRange = attackRange; // 예시: 만약 변수를 못 찾겠다면 타워의 빨간 원 반지름 수치를 직접 적어주셔도 됩니다.
+
+            if (distance > myAttackRange)
+            {
+                targetMonster = null; // "앗, (0,0,0)에 잠깐 나타난 유령이구나! 조준 취소!"
+            }
+        }
+
+        // 2. 가드라인을 통과한 진짜 사거리 내의 몬스터만 공격 실행
         if (targetMonster != null)
         {
             // 쿨타임이 지났다면 공격 실행
             if (Time.time >= nextAttackTime)
             {
-                // ★ 화살이 쫓아갈 수 있도록 찾은 몬스터(targetMonster)를 공격 함수에 넘겨줍니다!
                 Attack(targetMonster);
                 nextAttackTime = Time.time + attackCooldown;
             }
