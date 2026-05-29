@@ -41,11 +41,14 @@ public class Arrow : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            GameMonster monster = other.GetComponentInParent<GameMonster>();
+            // ★ GameMonster 대신 진짜 체력을 가진 MonsterMove를 조준합니다!
+            MonsterMove monster = other.GetComponent<MonsterMove>();
+            if (monster == null)
+                monster = other.GetComponentInParent<MonsterMove>();
 
             if (monster != null)
             {
-                monster.TakeDamage(damage);
+                monster.TakeDamage(damage); // 이제 진짜로 500에서 1이 정직하게 깎입니다!
             }
 
             Destroy(gameObject);

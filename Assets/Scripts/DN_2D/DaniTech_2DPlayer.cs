@@ -150,32 +150,27 @@ public class DaniTech_2DPlayer : MonoBehaviour
     }
 
     // 에디터 뷰에서 지면 체크 범위를 시각적으로 확인
-   
+
 
     // 6) 적 충돌 시 처리를 해보자
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // 6-1) 플레이어의 > 콜리전에 충돌한 객체가 어떤 Tag인지 1차 검사한다.
-            // 지면 같은 오브젝트와 점프시 충돌이 계속 오므로 이렇게 태그로 먼저 비교하는게 좋다
-            // 중단점을 찍어보면서 확인 추천
-        if (collision.gameObject.CompareTag("Enemy") == false)
+        if (collision.gameObject.CompareTag("Enemy") == false) return;
+
+        // 몸에 부딪힌 몬스터의 컴포넌트를 가져옵니다.
+        MonsterMove monster = collision.gameObject.GetComponent<MonsterMove>();
+        if (monster == null)
+            monster = collision.gameObject.GetComponentInParent<MonsterMove>();
+
+        // 몬스터가 살아있는 상태로 플레이어 몸에 닿았다면 플레이어 피를 깎습니다!
+        if (monster != null && monster._isAlive)
         {
-            return;
+            this.TakeDamage(10); // 플레이어 대미지 입음 (원하는 수치로 조정 가능)
+            Debug.Log($"[전투] 몬스터가 기지에 침입하여 플레이어가 대미지를 입었습니다!");
+
+            // 만약 디펜스 규칙상 기지에 닿은 몬스터를 자폭(소멸)시키고 싶다면 아래 코드를 활성화하세요.
+            // monster.TakeDamage(500); 
         }
-
-        // 6-2) 충돌한 몬스터의 정보를 받아오려고 시도해보자
-        var enemyComponent = collision.gameObject.GetComponent<DaniTech_2DEnemy>();
-        if (enemyComponent == null)
-        {
-            Debug.Log($"충돌한 적 객체에서 컴포넌트를 찾을 수 없습니다 : {gameObject.name}");
-            return;
-        }
-
-        // 6-3) 충돌된 오브젝트를 플레이어가 직접 제거하는게 아니라, Id로 게임오브젝트매니저한테 삭제를 요청한다
-        DaniTechGameObjectManager.Inst.RequestDestroyEntityObject(enemyComponent.EntityInstancId);
-
-        // 6-4) 피그미를 잡으면 스코어를 올려주자!
-        AddGameScore();
     }
 
     private void AddGameScore()

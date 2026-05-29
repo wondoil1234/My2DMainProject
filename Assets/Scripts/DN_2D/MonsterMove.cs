@@ -32,28 +32,29 @@ public class MonsterMove : MonoBehaviour
     {
         _instanceId = instanceId;
 
-        // 1. [순서 교정] 제일 먼저 엑셀 데이터 파일부터 수색해서 500 수치를 명확하게 가져옵니다!
         var monsterData = DaniTechGameDataManager.Instance.GetDNMonsterData(dataId);
         if (monsterData != null)
         {
-            _baseHp = monsterData.BaseHp; // 엑셀에 적힌 500이 정확하게 대입됩니다.
-            Debug.Log($"[엑셀 연동 성공] {dataId} 몬스터의 체력 {_baseHp}을 성공적으로 로드했습니다.");
-        }
-        else
-        {
-            // 만약 엑셀 파일과 문패 이름이 안 맞아서 데이터를 못 가져왔다면 콘솔창에 이 경고가 뜰 겁니다!
-            Debug.LogError($"[엑셀 연동 실패] {dataId}에 해당하는 데이터를 엑셀에서 찾을 수 없습니다! 기본 체력(50)으로 대체합니다.");
-            _baseHp = 50;
+            _baseHp = monsterData.BaseHp; // 엑셀에서 500 완벽 로드
         }
 
-        // 2. 엑셀에서 500을 완벽하게 주입받은 '후에' 최대 체력을 동기화해 줍니다. (오버플로우 방지)
-        _maxHp = _baseHp;
+        _maxHp = _baseHp; // 최대 체력도 500으로 완벽 동기화
 
-        // UI 매니저에게 머리 위 체력 바(HUD) 생성을 요청합니다.
+        // ----------------------------------------------------------------------
+        // ★ [체력 바 새로고침 마법] 
+        // UI 매니저에게 내 머리 위에 슬롯을 만들어 달라고 요청한 직후,
+        // 반드시 대미지 이벤트를 한 번 리셋하고 다시 갱신해 주어야 UI가 굳지 않고 실시간으로 움직입니다!
+        // ----------------------------------------------------------------------
         if (DaniTechUIManager.Instance != null)
         {
+            // 1. 혹시 남아있을지 모르는 옛날 연결 고리를 깔끔하게 청소합니다.
+            ResetStartChangedEvent();
+
+            // 2. UI 매니저에게 현재 500 피통을 가진 내 몸통 트랜스폼을 넘겨주며 UI 생성을 요청합니다.
             DaniTechUIManager.Instance.AddHudSlot(instanceId, this.gameObject.transform);
-            InvokestatchangedEvent(); // 500 피통 기준으로 UI 바를 가득 채웁니다.
+
+            // 3. "나 피 500 들고 태어났어!"라고 UI 전광판에 첫 신호를 쾅 쏴줍니다.
+            InvokestatchangedEvent();
         }
     }
 
@@ -117,11 +118,11 @@ public class MonsterMove : MonoBehaviour
         if (!_isAlive) return;
 
         _baseHp -= playerdamage;
+        Debug.Log($"[몬스터 피격] 현재 체력: {_baseHp} / {_maxHp}");
 
-        // 대미지 입은 수치를 머리 위 HP 바에 실시간 중계(반영)합니다.
         InvokestatchangedEvent();
 
-        // 피가 0 이하가 되면 죽습니다.
+
         if (_baseHp <= 0)
         {
             OnBattleUnitDie();
