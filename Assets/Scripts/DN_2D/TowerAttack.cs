@@ -7,6 +7,10 @@ public class TowerAttack : MonoBehaviour
     public float attackCooldown = 1f;    // 공격 속도 (쿨타임)
     public LayerMask monsterLayer;       // 몬스터 감지용 레이어
 
+    [Header("화살 발사 세팅")]
+    public GameObject arrowPrefab;       // ★ 유니티 에디터에서 연결할 완제품 화살 프리팹
+    public Transform firePoint;          // ★ 화살이 스폰될 위치 (비워두면 타워 중심에서 발사)
+
     [Header("애니메이터 연결")]
     [SerializeField] private Animator archerAnimator; // 직접 드래그앤드롭할 궁수 애니메이터
 
@@ -22,7 +26,8 @@ public class TowerAttack : MonoBehaviour
             // 쿨타임이 지났다면 공격 실행
             if (Time.time >= nextAttackTime)
             {
-                Attack();
+                // ★ 화살이 쫓아갈 수 있도록 찾은 몬스터(targetMonster)를 공격 함수에 넘겨줍니다!
+                Attack(targetMonster);
                 nextAttackTime = Time.time + attackCooldown;
             }
         }
@@ -49,14 +54,34 @@ public class TowerAttack : MonoBehaviour
         return closestMonster;
     }
 
-    void Attack()
+    // ★ 화살 소환을 위해 매개변수로 타겟 몬스터를 받도록 수정했습니다.
+    void Attack(Transform target)
     {
-        Debug.Log("사거리 내 몬스터 공격!");
+        Debug.Log("사거리 내 몬스터 공격 및 화살 발사!");
 
+        // 1. 애니메이션 트리거 발동
         if (archerAnimator != null)
         {
-            // 애니메이터에 설정한 Trigger 이름을 발동시킵니다.
             archerAnimator.SetTrigger("isShooting");
+        }
+
+        // 2. [핵심] 화살 생성 및 발사 처리
+        if (arrowPrefab != null && target != null)
+        {
+            // 화살이 태어날 위치 결정 (firePoint가 없으면 타워 중심)
+            Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position;
+
+            // 화살 프리팹을 실시간으로 복사하여 월드에 소환
+            GameObject arrowObject = Instantiate(arrowPrefab, spawnPosition, Quaternion.identity);
+
+            // 소환된 화살에서 우리가 짠 'Arrow' 스크립트를 조각냅니다.
+            Arrow arrowScript = arrowObject.GetComponent<Arrow>();
+
+            if (arrowScript != null)
+            {
+                // 화살에게 방금 조준한 몬스터 타겟을 지정해 줍니다!
+                arrowScript.Setup(target);
+            }
         }
     }
 
