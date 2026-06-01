@@ -11,11 +11,28 @@ public class MonsterMove : MonoBehaviour
     public int _instanceId;            
     public int _baseHp = 3;             
     private int _maxHp = 3;             
-    public bool _isAlive = true;       
+    public bool _isAlive = true;
+
+    [Header("골드 설정")]
+    public int _rewardGold = 10;
 
     private event Action<int, int> _onHpChanged;
     private event Action<int, int> _onMpChanged;
 
+    private void OnBattleUnitDie()
+    {
+        _isAlive = false;
+        if (DaniTechUIManager.Instance != null ) 
+            DaniTechUIManager.Instance.RemoveHudSlot(_instanceId);
+
+        if (GoldManager.Inst != null)
+            GoldManager.Inst.AddGold(_rewardGold);
+
+        Destroy(this.gameObject);
+        CheckVictory();
+    }
+    
+    
     void Start()
     {
         if (Waypoints.points != null && Waypoints.points.Length > 0)
@@ -114,18 +131,7 @@ public class MonsterMove : MonoBehaviour
         }
     }
 
-    private void OnBattleUnitDie()
-    {
-        _isAlive = false;
-
-        if (DaniTechUIManager.Instance != null)
-        {
-            DaniTechUIManager.Instance.RemoveHudSlot(_instanceId);
-        }
-
-        Destroy(this.gameObject);
-        CheckVictory();
-    }
+  
 
     private void CheckVictory()
     {

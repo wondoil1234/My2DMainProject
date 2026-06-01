@@ -214,6 +214,7 @@ public class DaniTechGameManager : MonoBehaviour
         // 웨이브 리셋 후 바로 게임 시작
         WaveManager.Inst.ResetWave();
         WaveManager.Inst.OnGameStart();
+        GoldManager.Inst.ResetGold();
     }
 
     public void GoToMainMenu()
@@ -229,6 +230,8 @@ public class DaniTechGameManager : MonoBehaviour
 
         // 웨이브 리셋
         WaveManager.Inst.ResetWave();
+        GoldManager.Inst.ResetGold();
+
 
         // 로비UI 열기
         DaniTechUIManager.Instance.OpenContentUI(DaniTechUIType.RobbyUI);
