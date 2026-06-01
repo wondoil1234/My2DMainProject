@@ -17,6 +17,15 @@ public class RobbyUI : DaniTechUIBase
 
 
         DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.RobbyUI);
+
+        if(WaveManager.Inst != null)
+        {
+            WaveManager.Inst.OnGameStart();
+        }
+        else
+        {
+            Debug.LogError("씬에 WaveManager 오브젝트가 없거나 생성되지 않았습니다!");
+        }
     }
 
     public void OnClick_GameQuit()
