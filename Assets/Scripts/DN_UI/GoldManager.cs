@@ -57,4 +57,9 @@ public class GoldManager : MonoBehaviour
         _currentGold = _startGold;
         UpdateGoldUI();
     }
+    public bool HasGold(int amount)
+    {
+        return _currentGold >= amount;
+    }
+
 }
