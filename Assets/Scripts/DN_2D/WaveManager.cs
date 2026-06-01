@@ -11,6 +11,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private float _delayBetweenWaves = 10f;
 
+    [Header("[웨이브 UI")]
+    [SerializeField] private UnityEngine.UI.Text waveText;
+    [SerializeField] private UnityEngine.UI.Text countdownText;
+
     public static WaveManager Inst { get; private set; }
 
     [Serializable]
@@ -32,6 +36,10 @@ public class WaveManager : MonoBehaviour
 
     public void OnGameStart()
     {
+        _cts = new CancellationTokenSource();
+        UpdateWaveUI();
+        if (countdownText != null)
+            countdownText.text = "";
         Debug.Log("게임 시작후 3초후 웨이브가 시작합니다");
         StartNextWaveAsync(3f).Forget();
     }
@@ -52,6 +60,16 @@ public class WaveManager : MonoBehaviour
             Destroy(monster.gameObject);
         }
     }
+    private void UpdateWaveUI()
+    {
+        if (waveText != null)
+            waveText.text = $"Wave {_currentWaveIndex + 1} / {_waves.Length}";
+    }
+
+    public bool IsLastWaveDone()
+    {
+        return _currentWaveIndex >= _waves.Length && !_isWaveRunning;
+    }
 
     public async UniTaskVoid StartNextWaveAsync(float delaySeconds)
     {
@@ -67,9 +85,24 @@ public class WaveManager : MonoBehaviour
         SpawnWaveLoopAsync().Forget();
     }
 
+    private async UniTaskVoid ShowCountdown(float seconds)
+    {
+        var token = _cts.Token;
+        for (int i = (int)seconds; i > 0; i--)
+        {
+            if (countdownText != null)
+                countdownText.text = $"다음 웨이브까지 {i}초";
+            await UniTask.Delay(1000, cancellationToken: token);
+        }
+        if (countdownText != null)
+            countdownText.text = "";
+    }
+
+
     private async UniTaskVoid SpawnWaveLoopAsync()
     {
         _isWaveRunning = true;
+        UpdateWaveUI();
         WaveData currentWave = _waves[_currentWaveIndex];
         Debug.Log($"=== [{_currentWaveIndex + 1} 웨이브 시작] ===");
 
@@ -90,6 +123,8 @@ public class WaveManager : MonoBehaviour
 
         _currentWaveIndex++;
         _isWaveRunning = false;
+
+        ShowCountdown(_delayBetweenWaves).Forget();
         StartNextWaveAsync(_delayBetweenWaves).Forget();
     }
 }

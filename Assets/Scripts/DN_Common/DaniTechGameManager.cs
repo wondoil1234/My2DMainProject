@@ -11,6 +11,7 @@ public class DaniTechGameManager : MonoBehaviour
 
     [Header("Ui 연결")]
     public GameObject popupGameOver;
+    public GameObject popupVictory;
     public List<GameObject> heartList;
 
 
@@ -27,6 +28,7 @@ public class DaniTechGameManager : MonoBehaviour
         LoadSaveData();
 
         currentLife = maxLife;
+        popupVictory.SetActive(false);
         popupGameOver.SetActive(false);
     }
 
@@ -186,6 +188,12 @@ public class DaniTechGameManager : MonoBehaviour
         if (currentLife <= 0) TriggerGameOver();
     }
 
+    public void TriggerVictory()
+    {
+        Time.timeScale = 0f;
+        popupVictory.SetActive(true);
+    }
+
     public void TriggerGameOver()
     {
         Time.timeScale = 0f;
@@ -197,6 +205,7 @@ public class DaniTechGameManager : MonoBehaviour
         Time.timeScale = 1f;
         currentLife = maxLife;
         StageManager.Inst.ResetGame();
+        popupVictory.SetActive(false);
         popupGameOver.SetActive(false);
 
         for (int i = 0; i < heartList.Count; i++)
@@ -212,6 +221,7 @@ public class DaniTechGameManager : MonoBehaviour
         Time.timeScale = 1f;
         currentLife = maxLife;
         StageManager.Inst.ResetGame();
+        popupVictory.SetActive(false);
         popupGameOver.SetActive(false);
 
         for (int i = 0; i < heartList.Count; i++)

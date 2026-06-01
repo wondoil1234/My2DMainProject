@@ -94,9 +94,10 @@ public class MonsterMove : MonoBehaviour
         }
 
         Destroy(gameObject);
+        CheckVictory();
     }
 
-    
+
     public void TakeDamage(int playerdamage)
     {
         if (!_isAlive) return;
@@ -123,6 +124,21 @@ public class MonsterMove : MonoBehaviour
         }
 
         Destroy(this.gameObject);
+        CheckVictory();
+    }
+
+    private void CheckVictory()
+    {
+        if (WaveManager.Inst == null) return;
+        if (!WaveManager.Inst.IsLastWaveDone()) return;
+        
+        
+        
+        MonsterMove[] remaining = FindObjectsOfType<MonsterMove>();
+        if(remaining.Length <= 1 && WaveManager.Inst.IsLastWaveDone())
+        {
+            DaniTechGameManager.Inst.TriggerVictory();
+        }
     }
 
     public void BindOnstatChangedEvent(Action<int, int> hpChangeCallback, Action<int, int> mpChangeCallback)

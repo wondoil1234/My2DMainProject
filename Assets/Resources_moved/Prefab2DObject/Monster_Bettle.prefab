@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d856592eeef99644490ad7f42ac47604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterMove
-  speed: 30
+  speed: 3
   _instanceId: 0
   _baseHp: 50
   _isAlive: 1
