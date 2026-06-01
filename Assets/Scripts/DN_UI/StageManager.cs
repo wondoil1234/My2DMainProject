@@ -16,6 +16,8 @@ public class StageManager : MonoBehaviour
     {
         Inst = this;
         _currentBaseLife = _maxBaseLife;
+
+        ClearRemainingHPBars();
     }
 
     public void DecreaseBaseLife(int amount = 1)
@@ -24,6 +26,8 @@ public class StageManager : MonoBehaviour
 
         _currentBaseLife -= amount;
         Debug.Log($"[기지 공격] 기지가 공격받습니다 남은 목숨 : {_currentBaseLife} / {_maxBaseLife}");
+
+        DaniTechGameManager.Inst.LoseLife();
 
         if (_currentBaseLife <= 0)
         {
@@ -35,9 +39,32 @@ public class StageManager : MonoBehaviour
     private void ProcessGameOver()
     {
         _isGameOver = true;
-
         Time.timeScale = 0f;
-
         Debug.LogError("기지가 파괴 되었습니다!");
+
+        DaniTechGameManager.Inst.TriggerGameOver();
     }
+
+    public void ResetGame()
+    {
+        _isGameOver = false;
+        _currentBaseLife = _maxBaseLife;
+
+        ClearRemainingHPBars();
+    }
+
+    public void ClearRemainingHPBars()
+    {
+        HudUI hudUI =  FindObjectOfType<HudUI>();
+
+        if (hudUI != null)
+        {
+            hudUI.ClearAllSlots();
+        }
+        else
+        {
+            Debug.LogWarning("[StageManager] 씬에서 HudUI 관리자를 찾을 수 없습니다.");
+        }
+    }
+
 }

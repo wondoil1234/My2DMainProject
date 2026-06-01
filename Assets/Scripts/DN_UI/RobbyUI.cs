@@ -20,6 +20,7 @@ public class RobbyUI : DaniTechUIBase
 
         if(WaveManager.Inst != null)
         {
+            WaveManager.Inst.ResetWave();
             WaveManager.Inst.OnGameStart();
         }
         else

@@ -38,4 +38,18 @@ public class HudUI : DaniTechUIBase
             _hudslotList.Remove(instanceId);
         }
     }
+
+    public void ClearAllSlots()
+    {
+        foreach (var slot in _hudslotList.Values)
+        {
+            if (slot != null && slot.gameObject != null)
+            {
+                Destroy(slot.gameObject);
+            }
+        }
+
+        _hudslotList.Clear();
+        Debug.Log("[HudUI] 원본 데이터 보존 완료! 동적 체력바 슬롯만 안전하게 청소했습니다.");
+    }
 }

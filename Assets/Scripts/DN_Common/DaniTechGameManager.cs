@@ -5,9 +5,16 @@ public class DaniTechGameManager : MonoBehaviour
 {
     public static DaniTechGameManager Inst { get; set; }
 
-    //public DaniTech_2DPlayer LocalPlayer; 
+    [Header("Life System")]
+    public int maxLife = 3;
+    private int currentLife;
 
-    // 플레이 중에 저장되어야 하는 정보들이 있는 위치
+    [Header("Ui 연결")]
+    public GameObject popupGameOver;
+    public List<GameObject> heartList;
+
+
+
     private DaniTechPlayerModel _playerModel = new DaniTechPlayerModel();
 
     private void Awake()
@@ -18,6 +25,9 @@ public class DaniTechGameManager : MonoBehaviour
     private void Start()
     {
         LoadSaveData();
+
+        currentLife = maxLife;
+        popupGameOver.SetActive(false);
     }
 
     public void SaveData()
@@ -167,4 +177,51 @@ public class DaniTechGameManager : MonoBehaviour
     {
         return DaniTechGameObjectManager.Inst.GetLocalPlayer();
     }
+
+    public void LoseLife()
+    {
+        if (currentLife <= 0) return;
+        currentLife--;
+        heartList[currentLife].SetActive(false);
+        if (currentLife <= 0) TriggerGameOver();
+    }
+
+    public void TriggerGameOver()
+    {
+        Time.timeScale = 0f;
+        popupGameOver.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        currentLife = maxLife;
+        StageManager.Inst.ResetGame();
+        popupGameOver.SetActive(false);
+
+        for (int i = 0; i < heartList.Count; i++)
+            heartList[i].SetActive(true);
+
+        // 웨이브 리셋 후 바로 게임 시작
+        WaveManager.Inst.ResetWave();
+        WaveManager.Inst.OnGameStart();
+    }
+
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1f;
+        currentLife = maxLife;
+        StageManager.Inst.ResetGame();
+        popupGameOver.SetActive(false);
+
+        for (int i = 0; i < heartList.Count; i++)
+            heartList[i].SetActive(true);
+
+        // 웨이브 리셋
+        WaveManager.Inst.ResetWave();
+
+        // 로비UI 열기
+        DaniTechUIManager.Instance.OpenContentUI(DaniTechUIType.RobbyUI);
+    }
 }
+
