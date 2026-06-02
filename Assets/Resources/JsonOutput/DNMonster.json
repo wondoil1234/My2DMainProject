@@ -58,5 +58,31 @@
     ],
     "IconPath": "Icon/Icon_Dino",
     "PrefabPath": "2DObject/Monster_Dino"
+  },
+  {
+    "Id": "mob_shark_1",
+    "Name": "상어",
+    "Description": "상어다.",
+    "BaseHp": 50,
+    "BaseAtk": 30,
+    "NormalAtkMultiple": 1,
+    "SkillAtkMultipleList": [
+      2
+    ],
+    "IconPath": "Icon/Icon_Shark",
+    "PrefabPath": "2DObject/Monster_Shark"
+  },
+  {
+    "Id": "mob_slime_1",
+    "Name": "슬라임",
+    "Description": "슬라임이다.",
+    "BaseHp": 100,
+    "BaseAtk": 30,
+    "NormalAtkMultiple": 1,
+    "SkillAtkMultipleList": [
+      2
+    ],
+    "IconPath": "Icon/Icon_Slime",
+    "PrefabPath": "2DObject/Monster_Slime"
   }
 ]
