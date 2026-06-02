@@ -36,7 +36,7 @@
     "Id": "mob_bettle_1",
     "Name": "비틀",
     "Description": "비틀이다.",
-    "BaseHp": 500,
+    "BaseHp": 30,
     "BaseAtk": 20,
     "NormalAtkMultiple": 1,
     "SkillAtkMultipleList": [

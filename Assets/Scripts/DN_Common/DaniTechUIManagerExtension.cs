@@ -42,7 +42,7 @@ public static class DaniTechUIManagerExtension
         uiManager.OpenLoadingUI();
         uiManager.OpenContentUI(DaniTechUIType.RobbyUI);
         uiManager.OpenUI(DaniTechUIRootType.MainUI, DaniTechUIType.HudUI);
-        uiManager.OpenUI(DaniTechUIRootType.MainUI, DaniTechUIType.DNMainUI);
+        //uiManager.OpenUI(DaniTechUIRootType.MainUI, DaniTechUIType.DNMainUI);
         // 게임 로비 UI를 여기서 오픈해주자 -> uiManager.
         // MainUI도
     }

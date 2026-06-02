@@ -129,17 +129,14 @@ public class GameMonster : MonsterBase
         }
     }
 
-    // ★ 화살(Arrow.cs)이 이 함수를 때려 대미지를 주게 됩니다!
     public void TakeDamage(int playerdamage)
     {
-        if (!_isAlive) return; // 이미 죽은 몬스터라면 연산 무시
+        if (!_isAlive) return; 
 
         _baseHp -= playerdamage;
 
-        // 실시간으로 대미지 입은 수치를 머리 위 HP 바에 반영합니다.
         InvokestatchangedEvent();
 
-        // ★ [버그 수정] 피가 정확히 0이 되어도 죽도록 '<= 0' 상태로 안전장치를 고쳤습니다.
         if (_baseHp <= 0)
         {
             OnBattleUnitDie();

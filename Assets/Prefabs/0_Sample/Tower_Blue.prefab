@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 6654997153301894567}
   - component: {fileID: 7716944807178289560}
   - component: {fileID: 8759515186938632351}
-  m_Layer: 0
+  - component: {fileID: 4871028428006150314}
+  - component: {fileID: 885204474248979542}
+  m_Layer: 9
   m_Name: Tower_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,6 +116,59 @@ MonoBehaviour:
   arrowPrefab: {fileID: 3512793391538480298, guid: 807335b5888e42c41a7c6b665f0fc912, type: 3}
   firePoint: {fileID: 4570611197492449757}
   archerAnimator: {fileID: 5564037902417246459}
+--- !u!114 &4871028428006150314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624474913526479073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f10fcd69dd108c46bdd1f933854643a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerData
+  towerName: "\uB808\uC5B4"
+  grade: 1
+  damage: 30
+  attackRange: 5
+  attackCooldown: 1
+--- !u!58 &885204474248979542
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624474913526479073}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!1 &1315651507375883744
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4570611197492449757}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +211,7 @@ GameObject:
   - component: {fileID: 9077052151902883031}
   - component: {fileID: 5921204006090525839}
   - component: {fileID: 5564037902417246459}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Archer_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

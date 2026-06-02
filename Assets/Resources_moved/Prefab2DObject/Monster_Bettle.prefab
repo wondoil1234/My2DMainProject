@@ -143,8 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterMove
   speed: 3
   _instanceId: 0
-  _baseHp: 50
+  _baseHp: 30
   _isAlive: 1
+  _rewardGold: 10
 --- !u!1 &2944356783977162841
 GameObject:
   m_ObjectHideFlags: 0

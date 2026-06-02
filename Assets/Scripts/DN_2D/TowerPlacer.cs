@@ -15,9 +15,29 @@ public class TowerPlacer : MonoBehaviour
     [Header("타워 비용")]
     public int[] towerCosts = { 100, 150, 200, 250, 300 };
 
+    [Header("버튼 텍스트 연결")]
+    public UnityEngine.UI.Text[] buttonTexts;
+
+    [Header("타워 이름")]
+    public string[] towerNames = { "검정", "파랑", "보라", "빨강", "노랑" };
+
     private GameObject _previewTower;
     private int _selectedIndex = -1;
     private bool _isPlacing = false;
+
+    private void Start()
+    {
+        UpdateButtonTexts();
+    }
+
+    private void UpdateButtonTexts()
+    {
+        for (int i = 0; i < buttonTexts.Length; i++)
+        {
+            if (buttonTexts[i] != null)
+                buttonTexts[i].text = $"{towerNames[i]}\n{towerCosts[i]}G";
+        }
+    }
 
     private void Awake()
     {
@@ -63,11 +83,14 @@ public class TowerPlacer : MonoBehaviour
 
         _previewTower = Instantiate(towerPrefabs[index]);
         SetPreviewAlpha(_previewTower, 0.5f);
+
+        _previewTower.layer = LayerMask.NameToLayer("Default");
+        foreach (Transform child in _previewTower.GetComponentsInChildren<Transform>())
+            child.gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
     private void TryPlaceTower(Vector3 pos)
     {
-        // 배치 가능 구역 확인
         Collider2D hit = Physics2D.OverlapPoint(pos, placementLayer);
         if (hit == null)
         {
@@ -75,25 +98,27 @@ public class TowerPlacer : MonoBehaviour
             return;
         }
 
-        // 이미 타워 있는지 확인
-        Collider2D existing = Physics2D.OverlapPoint(pos, towerLayer);
+        Collider2D existing = Physics2D.OverlapCircle(pos, 0.5f, towerLayer);
         if (existing != null)
         {
             Debug.Log("이미 타워가 있습니다!");
             return;
         }
 
-        // 골드 차감
+
         GoldManager.Inst.SpendGold(towerCosts[_selectedIndex]);
 
-        // 타워 배치
         Destroy(_previewTower);
         GameObject tower = Instantiate(
-            towerPrefabs[_selectedIndex], 
-            new Vector3(pos.x, pos.y, 0), 
+            towerPrefabs[_selectedIndex],
+            new Vector3(pos.x, pos.y, 0),
             Quaternion.identity
         );
+
         tower.layer = LayerMask.NameToLayer("Tower");
+
+        foreach (Transform child in tower.GetComponentsInChildren<Transform>())
+            child.gameObject.layer = LayerMask.NameToLayer("Tower");
 
         _isPlacing = false;
         _selectedIndex = -1;
