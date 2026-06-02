@@ -36,7 +36,7 @@
     "Id": "mob_bettle_1",
     "Name": "비틀",
     "Description": "비틀이다.",
-    "BaseHp": 30,
+    "BaseHp": 100,
     "BaseAtk": 20,
     "NormalAtkMultiple": 1,
     "SkillAtkMultipleList": [
@@ -63,7 +63,7 @@
     "Id": "mob_shark_1",
     "Name": "상어",
     "Description": "상어다.",
-    "BaseHp": 50,
+    "BaseHp": 100,
     "BaseAtk": 30,
     "NormalAtkMultiple": 1,
     "SkillAtkMultipleList": [

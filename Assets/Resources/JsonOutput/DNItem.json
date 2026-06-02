@@ -138,5 +138,19 @@
     "UseItemParameterList": [
       "tower_Red:1"
     ]
+  },
+  {
+    "Id": "Item_Unit_1",
+    "Name": "전사",
+    "Description": "소환하는 전사다.",
+    "ItemType": "Rare",
+    "Grade": "Rare",
+    "MaxStackCount": 1,
+    "SellingPrice": 150,
+    "IconPath": "Icon/Icon_Item_Unit_1",
+    "UseItemType": "SummonMonster",
+    "UseItemParameterList": [
+      "Unit_Warrior:1"
+    ]
   }
 ]

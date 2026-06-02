@@ -188,6 +188,17 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
                             return;
                         }
                     }
+
+                    else if (string.IsNullOrEmpty(targetDataId) == false && targetDataId == "Item_Unit_1")
+                    {
+                        DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.DNInventory);
+
+                        string unitPrefabName = "Unit_Warrior";
+
+                        DaniTechGameObjectManager.Inst.CreateUnitObject(unitPrefabName).Forget();
+
+                        return;
+                    }
                 }
 
                 ActiveUseSelectItemButton(slot.IsUsableItem);

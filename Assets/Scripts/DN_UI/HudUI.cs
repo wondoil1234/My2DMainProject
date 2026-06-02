@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
 public class HudUI : DaniTechUIBase
 {
     [SerializeField] private GameObject prefab_HudSlot;
@@ -10,7 +11,7 @@ public class HudUI : DaniTechUIBase
     private Dictionary<int, HudSlotUI> _hudslotList = new Dictionary<int, HudSlotUI>();
 
 
-    public void AddHudSlot(int instanceId,Transform targettransform)
+    public void AddHudSlot(int instanceId, Transform targettransform)
     {
         CreatedHudSlot(instanceId, targettransform);
     }
@@ -29,9 +30,9 @@ public class HudUI : DaniTechUIBase
 
     public void RemoveHudSlot(int instanceId)
     {
-        if( _hudslotList.ContainsKey(instanceId) == true)
+        if (_hudslotList.ContainsKey(instanceId) == true)
         {
-            var slot = _hudslotList[instanceId]; 
+            var slot = _hudslotList[instanceId];
 
             Destroy(slot.gameObject);
 
@@ -51,5 +52,17 @@ public class HudUI : DaniTechUIBase
 
         _hudslotList.Clear();
         Debug.Log("[HudUI] 원본 데이터 보존 완료! 동적 체력바 슬롯만 안전하게 청소했습니다.");
+    }
+
+    public void UpdateHudHpSlot(int instanceId, int currentHp, int maxHp)
+    {
+        // 딕셔너리에서 ID에 맞는 체력바 슬롯을 안전하게 꺼내옵니다.
+        if (_hudslotList.TryGetValue(instanceId, out HudSlotUI slot))
+        {
+            if (slot != null)
+            {
+                slot.OnTargetEntityHpChanged(currentHp, maxHp);
+            }
+        }
     }
 }

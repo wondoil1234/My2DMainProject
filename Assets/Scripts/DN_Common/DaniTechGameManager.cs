@@ -36,6 +36,7 @@ public class DaniTechGameManager : MonoBehaviour
         AddItem("Item_Tower_3", 1);
         AddItem("Item_Tower_4", 1);
         AddItem("Item_Tower_5", 1);
+        AddItem("Item_Unit_1", 1);
 
         currentLife = maxLife;
         popupVictory.SetActive(false);
@@ -219,7 +220,37 @@ public class DaniTechGameManager : MonoBehaviour
         for (int i = 0; i < heartList.Count; i++)
             heartList[i].SetActive(true);
 
-        // 웨이브 리셋 후 바로 게임 시작
+        UnitMove[] activeUnits = FindObjectsOfType<UnitMove>();
+        foreach (UnitMove unit in activeUnits)
+        {
+            if (unit != null && unit.gameObject != null)
+            {
+                Destroy(unit.gameObject);
+            }
+        }
+
+        MonsterMove[] activeMonsters = FindObjectsOfType<MonsterMove>();
+        foreach (MonsterMove monster in activeMonsters)
+        {
+            if (monster != null && monster.gameObject != null)
+            {
+                if (DaniTechUIManager.Instance != null && monster._instanceId != 0)
+                {
+                    DaniTechUIManager.Instance.RemoveHudSlot(monster._instanceId);
+                }
+                Destroy(monster.gameObject);
+            }
+        }
+
+        GameObject[] allGameObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allGameObjects)
+        {
+            if (obj != null && obj.name.Contains("Tower_"))
+            {
+                Destroy(obj);
+            }
+        }
+
         WaveManager.Inst.ResetWave();
         WaveManager.Inst.OnGameStart();
         GoldManager.Inst.ResetGold();
@@ -236,12 +267,40 @@ public class DaniTechGameManager : MonoBehaviour
         for (int i = 0; i < heartList.Count; i++)
             heartList[i].SetActive(true);
 
-        // 웨이브 리셋
+        UnitMove[] activeUnits = FindObjectsOfType<UnitMove>();
+        foreach (UnitMove unit in activeUnits)
+        {
+            if (unit != null && unit.gameObject != null)
+            {
+                Destroy(unit.gameObject);
+            }
+        }
+
+        MonsterMove[] activeMonsters = FindObjectsOfType<MonsterMove>();
+        foreach (MonsterMove monster in activeMonsters)
+        {
+            if (monster != null && monster.gameObject != null)
+            {
+                if (DaniTechUIManager.Instance != null && monster._instanceId != 0)
+                {
+                    DaniTechUIManager.Instance.RemoveHudSlot(monster._instanceId);
+                }
+                Destroy(monster.gameObject);
+            }
+        }
+
+        GameObject[] allGameObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allGameObjects)
+        {
+            if (obj != null && obj.name.Contains("Tower_"))
+            {
+                Destroy(obj);
+            }
+        }
+
         WaveManager.Inst.ResetWave();
         GoldManager.Inst.ResetGold();
 
-
-        // 로비UI 열기
         DaniTechUIManager.Instance.OpenContentUI(DaniTechUIType.RobbyUI);
     }
 }

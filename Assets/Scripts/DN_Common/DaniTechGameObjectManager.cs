@@ -113,9 +113,32 @@ public class DaniTechGameObjectManager : MonoBehaviour
         if (monsterData == null) return;
 
         var createdObj = await DaniTechResourceManager.Inst.InstantiateAsync(monsterData.PrefabPath, Root_Enemy, true);
-        createdObj.transform.position = spawnSpot.position;
+
+        if (spawnSpot != null)
+        {
+            createdObj.transform.position = spawnSpot.position;
+        }
+        else
+        {
+            createdObj.transform.position = Vector3.zero;
+        }
 
         AddMonsterObjectOnCreate(createdObj, monsterDataId);
+    }
+
+    public async UniTaskVoid CreateUnitObject(string unitPrefabAddress)
+    {
+        var createdObj = await DaniTechResourceManager.Inst.InstantiateAsync(unitPrefabAddress, Root_Enemy, true);
+
+        if (createdObj == null)
+        {
+            Debug.LogError($"[소환 실패] {unitPrefabAddress} 프리팹을 어드레서블에서 불러오지 못했습니다.");
+            return;
+        }
+
+        createdObj.transform.position = Vector3.zero;
+
+        AddMonsterObjectOnCreate(createdObj, unitPrefabAddress);
     }
 
     private void AddMonsterObjectOnCreate(GameObject createdObject, string monsterDataId)
@@ -123,13 +146,26 @@ public class DaniTechGameObjectManager : MonoBehaviour
         _objectInstanceKeyGenerator++;
         int generatedInstanceId = _objectInstanceKeyGenerator;
 
-        // ★ [수정] 지워진 GameMonster 대신 새로 합친 MonsterMove 컴포넌트를 끄집어냅니다.
+        var unitMoveComponent = createdObject.GetComponent<UnitMove>();
+        if (unitMoveComponent != null)
+        {
+            if (Waypoints.points != null && Waypoints.points.Length > 0)
+            {
+                unitMoveComponent.InitUnitPath(Waypoints.points);
+                Debug.Log($"[유닛 소환 성공] {createdObject.name}이 역방향 웨이포인트 경로를 주입받았습니다.");
+            }
+            else
+            {
+                Debug.LogError("Waypoints.points가 비어있습니다! 맵에 웨이포인트 오브젝트가 배치되었는지 확인하세요.");
+            }
+
+            return;
+        }
+
         var monsterComponent = createdObject.GetComponent<MonsterMove>();
         if (monsterComponent == null) return;
 
         _MonsterObjectContainer.Add(generatedInstanceId, monsterComponent);
-
-        // ★ [수정] 이제 MonsterMove 내부의 InitMonster가 실행되면서 체력 바(HUD) 생성을 정상 요청합니다!
         monsterComponent.InitMonster(generatedInstanceId, monsterDataId);
     }
 

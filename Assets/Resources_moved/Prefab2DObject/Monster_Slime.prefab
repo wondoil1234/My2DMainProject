@@ -145,6 +145,8 @@ MonoBehaviour:
   _instanceId: 0
   _baseHp: 30
   _isAlive: 1
+  monsterDamage: 30
+  attackCooldown: 1.2
   _rewardGold: 10
 --- !u!1 &2944356783977162841
 GameObject:

@@ -37,9 +37,16 @@ public class HudSlotUI : MonoBehaviour
             monster.BindOnstatChangedEvent(OnTargetEntityHpChanged, OnTargetEntityMpChanged);
             return;
         }
+
+        var unit = gobj.GetComponent<UnitMove>();
+        if (unit != null)
+        {
+            unit.BindOnstatChangedEvent(OnTargetEntityHpChanged, OnTargetEntityMpChanged);
+            return;
+        }
     }
 
-    private void OnTargetEntityHpChanged(int curhp, int maxHp)
+    public void OnTargetEntityHpChanged(int curhp, int maxHp)
     {
         slider_Hp.value = (curhp / (float)maxHp);
     }

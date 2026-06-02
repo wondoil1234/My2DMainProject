@@ -162,7 +162,7 @@ MonoBehaviour:
   towerName: "\uB178\uB9D0"
   grade: 0
   damage: 10
-  attackRange: 5
+  attackRange: 6
   attackCooldown: 1
 --- !u!58 &5579851801527433423
 CircleCollider2D:
