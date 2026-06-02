@@ -82,5 +82,61 @@
     "UseItemParameterList": [
       "tower_Black:1"
     ]
+  },
+  {
+    "Id": "Item_Tower_2",
+    "Name": "레어 타워",
+    "Description": "레어등급의 타워다.",
+    "ItemType": "Rare",
+    "Grade": "Rare",
+    "MaxStackCount": 1,
+    "SellingPrice": 100,
+    "IconPath": "Icon/Icon_Item_Tower_2",
+    "UseItemType": "SummonMonster",
+    "UseItemParameterList": [
+      "tower_Blue:1"
+    ]
+  },
+  {
+    "Id": "Item_Tower_3",
+    "Name": "에픽 타워",
+    "Description": "에픽등급의 타워다.",
+    "ItemType": "Epic",
+    "Grade": "Epic",
+    "MaxStackCount": 1,
+    "SellingPrice": 200,
+    "IconPath": "Icon/Icon_Item_Tower_3",
+    "UseItemType": "SummonMonster",
+    "UseItemParameterList": [
+      "tower_Purple:1"
+    ]
+  },
+  {
+    "Id": "Item_Tower_4",
+    "Name": "유니크 타워",
+    "Description": "유니크등급의 타워다.",
+    "ItemType": "Unique",
+    "Grade": "Unique",
+    "MaxStackCount": 1,
+    "SellingPrice": 400,
+    "IconPath": "Icon/Icon_Item_Tower_4",
+    "UseItemType": "SummonMonster",
+    "UseItemParameterList": [
+      "tower_Yellow:1"
+    ]
+  },
+  {
+    "Id": "Item_Tower_5",
+    "Name": "레전더리 타워",
+    "Description": "레전더리등급의 타워다.",
+    "ItemType": "Legend",
+    "Grade": "Legend",
+    "MaxStackCount": 1,
+    "SellingPrice": 800,
+    "IconPath": "Icon/Icon_Item_Tower_5",
+    "UseItemType": "SummonMonster",
+    "UseItemParameterList": [
+      "tower_Red:1"
+    ]
   }
 ]

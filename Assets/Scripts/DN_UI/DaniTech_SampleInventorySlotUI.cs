@@ -94,4 +94,12 @@ public class DaniTech_SampleInventorySlotUI : MonoBehaviour
         Image_Selected.gameObject.SetActive(isSelected);
     }
 
+    public void SetTowerPriceText(int price)
+    {
+        if(Text_StackCount != null)
+        {
+            Text_StackCount.text = $"{price}G";
+        }
+    }
+
 }

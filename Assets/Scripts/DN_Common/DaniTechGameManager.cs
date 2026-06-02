@@ -27,23 +27,16 @@ public class DaniTechGameManager : MonoBehaviour
     {
         LoadSaveData();
 
-        bool hasTower = false;
         if (_playerModel != null && _playerModel.ItemList != null)
         {
-            foreach (var item in _playerModel.ItemList)
-            {
-                if (item.ItemDataId == "Item_Tower_1")
-                {
-                    hasTower = true;
-                    break;
-                }
-            }
+            _playerModel.ItemList.Clear(); 
         }
+        AddItem("Item_Tower_1", 1);
+        AddItem("Item_Tower_2", 1);
+        AddItem("Item_Tower_3", 1);
+        AddItem("Item_Tower_4", 1);
+        AddItem("Item_Tower_5", 1);
 
-        if (hasTower == false)
-        {
-            AddItem("Item_Tower_1", 1);
-        }
         currentLife = maxLife;
         popupVictory.SetActive(false);
         popupGameOver.SetActive(false);
@@ -151,28 +144,25 @@ public class DaniTechGameManager : MonoBehaviour
 
             }
         }
-        else if (itemUseType == "SummonMonster")
-        {
-            if(useItemParamList.Count > 0)
+            else if (itemUseType == "SummonMonster")
             {
-                string str = useItemParamList[0];
-                var strArr = str.Split(":");
-                if(strArr.Length > 1)
+                if (useItemParamList.Count > 0)
                 {
-                    string monsterDataId = strArr[0];
-                    int monsterSummonCount = int.Parse(strArr[1]);
-
-                    for(int i = 0; i < monsterSummonCount; i++)
+                    string str = useItemParamList[0];
+                    var strArr = str.Split(":");
+                    if (strArr.Length > 1)
                     {
-                        var playerComponent = GetLocalPlayer();
-                        DaniTechGameObjectManager.Inst.CreatMonsterObject(monsterDataId, playerComponent.transform).Forget();
+                        string monsterDataId = strArr[0]; 
+
+                        DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.DNInventory);
+
+                        if (TowerPlacer.Inst != null)
+                        {
+                            TowerPlacer.Inst.StartPlacementFromShop(monsterDataId);
+                        }
                     }
-
-
                 }
-
-            } 
-        }
+            }
     }
 
     private bool RequestRemoveItem(bool isRemoveItemExist, int removeTargetIdx)

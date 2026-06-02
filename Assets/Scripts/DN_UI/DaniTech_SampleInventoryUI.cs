@@ -118,27 +118,82 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
         _itemSlotList.Add(slotComponent.SlotItemUniqueId, slotComponent);
 
         slotComponent.BindSlotSelectEvent(OnChildSlotSelected);
+
+        if (string.IsNullOrEmpty(itemDataId) == false && itemDataId.StartsWith("Item_Tower_"))
+        {
+            int towerPrice = 0;
+
+            if (TowerPlacer.Inst != null)
+            {
+                if (itemDataId == "Item_Tower_1") towerPrice = TowerPlacer.Inst.towerCosts[0];     
+                else if (itemDataId == "Item_Tower_2") towerPrice = TowerPlacer.Inst.towerCosts[1]; 
+                else if (itemDataId == "Item_Tower_3") towerPrice = TowerPlacer.Inst.towerCosts[2];
+                else if (itemDataId == "Item_Tower_4") towerPrice = TowerPlacer.Inst.towerCosts[3]; 
+                else if (itemDataId == "Item_Tower_5") towerPrice = TowerPlacer.Inst.towerCosts[4]; 
+            }
+
+            slotComponent.SetTowerPriceText(towerPrice);
+        }
     }
 
 
     private void OnChildSlotSelected(long selectedItemUniqueId)
     {
-        foreach(var slotKv in _itemSlotList)
+        foreach (var slotKv in _itemSlotList)
         {
             var slot = slotKv.Value;
             bool isSlotSelected = (selectedItemUniqueId == slot.SlotItemUniqueId);
             slot.ChangeSelectedState(isSlotSelected);
 
-            if(isSlotSelected == true)
+            if (isSlotSelected == true)
             {
                 _currentSelectedItemUniqueId = slot.SlotItemUniqueId;
-                ActiveUseSelectItemButton(slot.IsUsableItem);
 
+                if (slot.IsUsableItem == true)
+                {
+                    var itemList = DaniTechGameManager.Inst.GetPlayerItemList();
+                    string targetDataId = "";
+                    foreach (var item in itemList)
+                    {
+                        if (item.ItemUniqueId == selectedItemUniqueId)
+                        {
+                            targetDataId = item.ItemDataId;
+                            break;
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(targetDataId) == false && targetDataId.StartsWith("Item_Tower_"))
+                    {
+                        string towerPrefabName = "";
+
+                        if (targetDataId == "Item_Tower_1") towerPrefabName = "Tower_Black";
+                        else if (targetDataId == "Item_Tower_2") towerPrefabName = "Tower_Blue";
+                        else if (targetDataId == "Item_Tower_3") towerPrefabName = "Tower_Purple";
+                        else if (targetDataId == "Item_Tower_4") towerPrefabName = "Tower_Yellow"; 
+                        else if (targetDataId == "Item_Tower_5") towerPrefabName = "Tower_Red";    
+
+                        if (string.IsNullOrEmpty(towerPrefabName) == false)
+                        {
+                            DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.DNInventory);
+
+                            if (TowerPlacer.Inst != null)
+                            {
+                                TowerPlacer.Inst.StartPlacementFromShop(towerPrefabName);
+                            }
+                            else
+                            {
+                                Debug.LogError("화면에 TowerPlacer 스크립트(오브젝트)가 존재하지 않습니다!");
+                            }
+
+                            return;
+                        }
+                    }
+                }
+
+                ActiveUseSelectItemButton(slot.IsUsableItem);
             }
         }
 
-
         Debug.LogWarning($"자식 슬롯 {selectedItemUniqueId} 선택됨!");
     }
-
 }

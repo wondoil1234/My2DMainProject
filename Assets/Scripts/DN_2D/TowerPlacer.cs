@@ -89,34 +89,63 @@ public class TowerPlacer : MonoBehaviour
             child.gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
+    public void StartPlacementFromShop(string towerDataId)
+    {
+        int targetIndex = -1;
+        for (int i = 0; i < towerPrefabs.Length; i++)
+        {
+            if (towerPrefabs[i] != null && towerPrefabs[i].name == towerDataId)
+            {
+                targetIndex = i;
+                break;
+            }
+        }
+
+        if (targetIndex == -1)
+        {
+            Debug.LogError($"[TowerPlacer] 프리팹 배열에서 '{towerDataId}' 이름을 찾을 수 없습니다! 인스펙터 설정을 확인하세요.");
+            return;
+        }
+
+        SelectTower(targetIndex);
+    }
+
     private void TryPlaceTower(Vector3 pos)
     {
-        Collider2D hit = Physics2D.OverlapPoint(pos, placementLayer);
+        Vector2 pos2D = new Vector2(pos.x, pos.y);
+
+        // 몬스터 경로 Y범위 제한
+        // 경로가 Y: -2 ~ 2 사이이므로 막기
+        if (pos.y >= -2f && pos.y <= 2f)
+        {
+            Debug.Log("몬스터 경로입니다!");
+            return;
+        }
+
+        Collider2D hit = Physics2D.OverlapPoint(pos2D, placementLayer);
         if (hit == null)
         {
             Debug.Log("배치 불가능한 위치!");
             return;
         }
 
-        Collider2D existing = Physics2D.OverlapCircle(pos, 0.5f, towerLayer);
+        Collider2D existing = Physics2D.OverlapCircle(pos2D, 0.5f, towerLayer);
         if (existing != null)
         {
             Debug.Log("이미 타워가 있습니다!");
             return;
         }
 
-
         GoldManager.Inst.SpendGold(towerCosts[_selectedIndex]);
 
         Destroy(_previewTower);
         GameObject tower = Instantiate(
             towerPrefabs[_selectedIndex],
-            new Vector3(pos.x, pos.y, 0),
+            new Vector3(pos2D.x, pos2D.y, 0),
             Quaternion.identity
         );
 
         tower.layer = LayerMask.NameToLayer("Tower");
-
         foreach (Transform child in tower.GetComponentsInChildren<Transform>())
             child.gameObject.layer = LayerMask.NameToLayer("Tower");
 
