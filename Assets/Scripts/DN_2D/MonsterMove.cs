@@ -121,7 +121,7 @@ public class MonsterMove : MonoBehaviour
                 {
                     _targetUnit = unit;
                     _currentSpeed = 0f; // 이동 정지!
-                    _attackTimer = attackCooldown; // 첫 선빵 장전
+                    _attackTimer = attackCooldown - 0.6f;
                     Debug.Log($"[몬스터 전투] {gameObject.name}이 전사를 만나 길을 멈추고 공격을 굳힙니다.");
                 }
             }

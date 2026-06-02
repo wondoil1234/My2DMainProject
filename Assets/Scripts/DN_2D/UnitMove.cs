@@ -214,7 +214,7 @@ public class UnitMove : MonoBehaviour
             {
                 _targetTargetMonster = enemy;
                 _currentSpeed = 0f;
-                _attackTimer = attackCooldown;
+                _attackTimer = attackCooldown - 0.3f;
                 if (_animator != null) _animator.SetBool("isMoving", false);
 
                 Debug.Log($"[전투 발생] 태그(Enemy)를 가진 {collision.gameObject.name}를 발견하여 전투를 시작합니다!");
