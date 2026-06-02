@@ -929,7 +929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 366795890388859388, guid: 752cff01670cd9344a4e9a6d8514ba1f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128834213685796828, guid: 752cff01670cd9344a4e9a6d8514ba1f, type: 3}
       propertyPath: m_RaycastTarget
@@ -3745,10 +3745,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   _waves:
-  - monsterDataId: mob_bettle_1
+  - monsterDataId: mob_slime_1
     spawnCount: 5
     spawnDelay: 1.5
-  - monsterDataId: mob_bettle_1
+  - monsterDataId: mob_shark_1
     spawnCount: 5
     spawnDelay: 1.5
   - monsterDataId: mob_bettle_1
@@ -14077,7 +14077,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 200, y: 60}
+  m_AnchoredPosition: {x: 1277, y: 60}
   m_SizeDelta: {x: 550, y: 80}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1532028112
@@ -15469,8 +15469,8 @@ MonoBehaviour:
   - {fileID: 7496382898789678826, guid: 4d6049d8871940d40a6c10ef0c22de9b, type: 3}
   - {fileID: 624474913526479073, guid: b0582084b93bec6418930f3cc5600f5d, type: 3}
   - {fileID: 4857179829000036824, guid: efa135e4fa08a9446a97b63ff4df91f3, type: 3}
-  - {fileID: 1036595456229640889, guid: e108c3f667981634098f3acf296d3c11, type: 3}
   - {fileID: 7864539062747237200, guid: 3bdd38e3ab8b56c40b37d169914f7a9b, type: 3}
+  - {fileID: 1036595456229640889, guid: e108c3f667981634098f3acf296d3c11, type: 3}
   placementLayer:
     serializedVersion: 2
     m_Bits: 256

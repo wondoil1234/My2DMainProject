@@ -25,8 +25,6 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 
     private void OnDisable()
     {
-
-
         Button_UseSelectItem.UnBindOnClickButtonEvent(OnClick_UseSelectItem);
     }
 
@@ -50,7 +48,7 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
             return;
         }
 
-        foreach (var itemModel in itemList) 
+        foreach (var itemModel in itemList)
         {
             CreateSlot(itemModel.ItemUniqueId, itemModel.ItemDataId, itemModel.ItemStackCount);
         }

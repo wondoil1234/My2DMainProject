@@ -27,6 +27,23 @@ public class DaniTechGameManager : MonoBehaviour
     {
         LoadSaveData();
 
+        bool hasTower = false;
+        if (_playerModel != null && _playerModel.ItemList != null)
+        {
+            foreach (var item in _playerModel.ItemList)
+            {
+                if (item.ItemDataId == "Item_Tower_1")
+                {
+                    hasTower = true;
+                    break;
+                }
+            }
+        }
+
+        if (hasTower == false)
+        {
+            AddItem("Item_Tower_1", 1);
+        }
         currentLife = maxLife;
         popupVictory.SetActive(false);
         popupGameOver.SetActive(false);
@@ -67,6 +84,7 @@ public class DaniTechGameManager : MonoBehaviour
         newItem.ItemStackCount = addItemCount;
 
         _playerModel.ItemList.Add(newItem);
+        SaveData();
     }
 
     public bool RequestUseItem(long requestUseTargetItemUniqueId)
