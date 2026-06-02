@@ -8,6 +8,7 @@ TagManager:
   - Map
   - Enemy
   - SkillObject
+  - PlayerUnit
   layers:
   - Default
   - TransparentFX

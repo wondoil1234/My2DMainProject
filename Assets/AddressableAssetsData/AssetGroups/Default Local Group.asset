@@ -65,6 +65,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d6049d8871940d40a6c10ef0c22de9b
+    m_Address: Tower_Black
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 63555c658eb534f48acbb1ba682fbec3
+    m_Address: Icon/Icon_Item_Unit_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 667b719d1d688874a8f6a8ad59d98106
     m_Address: Icon/Icon_Item_Box_1
     m_ReadOnly: 0
@@ -85,6 +95,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9150ff9a3f88646ddaf1ed327afa1315
+    m_Address: Icon/Icon_Item_Tower_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 988485599ab6ecb4db508e35e6b5086a
     m_Address: Sound/Pugmia_Bgm_Housing_1
     m_ReadOnly: 0
@@ -100,13 +115,33 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c84d25441265a4e42b000f20f8fb20d8
+    m_Address: Icon/Icon_Item_Tower_3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cfc5f99017f834a4aa425168d9f3048d
     m_Address: Icon/Icon_Item_Corn
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d73477b024157b540820416cea668332
+    m_Address: Unit_Warrior
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d8d61a3cf509c944a9072703554e32fb
     m_Address: Sound/Voice_Pug_1_success
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da5bd5128607d42b58a0100672bc61d3
+    m_Address: Icon/Icon_Item_Tower_5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: defebd30b7d2e4bff960711bed04e54f
+    m_Address: Icon/Icon_Item_Tower_4
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
