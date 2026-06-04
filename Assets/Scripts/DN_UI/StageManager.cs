@@ -17,24 +17,32 @@ public class StageManager : MonoBehaviour
         Inst = this;
         _currentBaseLife = _maxBaseLife;
 
+        var lifeContainer = FindObjectOfType<LifeContainer>();
+        if (lifeContainer != null)
+            lifeContainer.InitHearts(_maxBaseLife);
+
         ClearRemainingHPBars();
     }
 
     public void DecreaseBaseLife(int amount = 1)
     {
         if (_isGameOver) return;
-
         _currentBaseLife -= amount;
-        Debug.Log($"[기지 공격] 기지가 공격받습니다 남은 목숨 : {_currentBaseLife} / {_maxBaseLife}");
 
+        // 하트 업데이트
+        var lifeContainer = FindObjectOfType<LifeContainer>();
+        if (lifeContainer != null)
+            lifeContainer.UpdateHearts(_currentBaseLife);
+
+        Debug.Log($"[기지 공격] 남은 목숨 : {_currentBaseLife} / {_maxBaseLife}");
         DaniTechGameManager.Inst.LoseLife();
-
         if (_currentBaseLife <= 0)
         {
             _currentBaseLife = 0;
             ProcessGameOver();
         }
     }
+
 
     private void ProcessGameOver()
     {
