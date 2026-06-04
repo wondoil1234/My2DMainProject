@@ -108,10 +108,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitMove
   moveSpeed: 2
   arrivalDistance: 0.1
-  attackDamage: 10
+  attackDamage: 20
   attackCooldown: 1
+  _baseHp: 500
   _instanceId: 0
-  _baseHp: 50
   _isAlive: 1
 --- !u!58 &2173071269690030054
 CircleCollider2D:

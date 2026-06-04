@@ -146,7 +146,7 @@
     "ItemType": "Rare",
     "Grade": "Rare",
     "MaxStackCount": 1,
-    "SellingPrice": 150,
+    "SellingPrice": 100,
     "IconPath": "Icon/Icon_Item_Unit_1",
     "UseItemType": "SummonMonster",
     "UseItemParameterList": [

@@ -114,8 +114,6 @@ public class TowerPlacer : MonoBehaviour
     {
         Vector2 pos2D = new Vector2(pos.x, pos.y);
 
-        // 몬스터 경로 Y범위 제한
-        // 경로가 Y: -2 ~ 2 사이이므로 막기
         if (pos.y >= -2f && pos.y <= 2f)
         {
             Debug.Log("몬스터 경로입니다!");

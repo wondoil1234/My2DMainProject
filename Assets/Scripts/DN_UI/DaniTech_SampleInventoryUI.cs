@@ -101,20 +101,16 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 
     private void CreateSlot(long itemUniqueId, string itemDataId, int itemStackCount)
     {
-        // 1-1 수동 SetParant가 뒤에 지금은 자동으로 해주고 있다
         var gObj = Instantiate(Prefab_Slot, Transform_UISlotRoot);
         if (gObj == null) return;
 
-        // 1-2 자식 슬롯의 컴포넌트를 가져온다 -> 위에 게임오브젝트는 스크립트가 아직 아니므로
         var slotComponent = gObj.GetComponent<DaniTech_SampleInventorySlotUI>();
         if(slotComponent == null) return;
 
 
-        // 1-3 여기서 slotComponent가지고 뭔가를 하는 겁니다!
         slotComponent.InitSlot(itemUniqueId, itemDataId, itemStackCount);
         slotComponent.gameObject.name = $"ItemSlot : {slotComponent.SlotItemUniqueId}";
 
-        // 1-4 중복체크 해주면 좋긴 하지만, 일단 쉽게 컴포넌트(컴포넌트로 게임오브젝트는 받을 수 있으므로)를 보관해보자
         _itemSlotList.Add(slotComponent.SlotItemUniqueId, slotComponent);
 
         slotComponent.BindSlotSelectEvent(OnChildSlotSelected);
@@ -133,6 +129,16 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
             }
 
             slotComponent.SetTowerPriceText(towerPrice);
+        }
+
+        if (string.IsNullOrEmpty(itemDataId) == false && itemDataId == "Item_Unit_1")
+        {
+            var itemData = DaniTechGameDataManager.Instance.GetDNItemData(itemDataId);
+            if (itemData != null)
+            {
+                int unitPrice = int.Parse(itemData.SellingPrice);
+                slotComponent.SetTowerPriceText(unitPrice);
+            }
         }
     }
 
@@ -191,12 +197,19 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 
                     else if (string.IsNullOrEmpty(targetDataId) == false && targetDataId == "Item_Unit_1")
                     {
+                        var itemData = DaniTechGameDataManager.Instance.GetDNItemData(targetDataId);
+                        int cost = int.Parse(itemData.SellingPrice);
+
+                        if (!GoldManager.Inst.HasGold(cost))
+                        {
+                            Debug.Log("골드가 부족합니다!");
+                            return;
+                        }
+
+                        GoldManager.Inst.SpendGold(cost);
                         DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.DNInventory);
-
                         string unitPrefabName = "Unit_Warrior";
-
                         DaniTechGameObjectManager.Inst.CreateUnitObject(unitPrefabName).Forget();
-
                         return;
                     }
                 }

@@ -15,6 +15,8 @@ public class LifeContainer : MonoBehaviour
         for (int i = 0; i < maxLife; i++)
         {
             var heart = Instantiate(heartPrefab, transform);
+            heart.transform.localPosition = Vector3.zero;
+            heart.transform.localScale = Vector3.one;
             _heartList.Add(heart);
         }
     }

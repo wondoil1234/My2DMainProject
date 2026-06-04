@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NUnit.Framework.Interfaces;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DaniTechGameManager : MonoBehaviour
@@ -12,7 +13,10 @@ public class DaniTechGameManager : MonoBehaviour
     [Header("Ui 연결")]
     public GameObject popupGameOver;
     public GameObject popupVictory;
-    public List<GameObject> heartList;
+    public GameObject lifeContainer;
+    public GameObject wavePanel;
+    public GameObject goldPanel;
+
 
 
 
@@ -41,6 +45,10 @@ public class DaniTechGameManager : MonoBehaviour
         currentLife = maxLife;
         popupVictory.SetActive(false);
         popupGameOver.SetActive(false);
+
+        if (lifeContainer != null) lifeContainer.SetActive(false);
+        if (wavePanel != null) wavePanel.SetActive(false);
+        if (goldPanel != null) goldPanel.SetActive(false);
     }
 
     public void SaveData()
@@ -91,16 +99,12 @@ public class DaniTechGameManager : MonoBehaviour
             {
                 isRemoveItemExist = true;
 
-
                 string itemDataId = itemModel.ItemDataId;
                 var itemData = DaniTechGameDataManager.Instance.GetDNItemData(itemDataId);
-                if(string.IsNullOrEmpty(itemData.UseItemType) == false)
+                if (string.IsNullOrEmpty(itemData.UseItemType) == false)
                 {
-                    UseItemFunction(itemData.UseItemType, itemData.UseItemParameterList);
+                    UseItemFunction(itemData.UseItemType, itemData.UseItemParameterList, itemData); // itemData 추가
                 }
-
-
-
 
                 break;
             }
@@ -112,12 +116,10 @@ public class DaniTechGameManager : MonoBehaviour
         return true;
     }
 
-    private void UseItemFunction(string itemUseType, List<string> useItemParamList)
+
+    private void UseItemFunction(string itemUseType, List<string> useItemParamList, DNItemData itemData)
     {
-        if (useItemParamList == null || useItemParamList.Count == 0)
-
-
-
+        if (useItemParamList == null || useItemParamList.Count == 0) return; // return 추가
 
         if (itemUseType == "RandomItemBox")
         {
@@ -125,45 +127,49 @@ public class DaniTechGameManager : MonoBehaviour
         }
         else if (itemUseType == "StatChangeAtk")
         {
-            if(useItemParamList.Count > 0)
+            if (useItemParamList.Count > 0)
             {
                 string str = useItemParamList[0];
                 int statChangeVal = int.Parse(str);
                 var playerComponent = GetLocalPlayer();
                 playerComponent.AddAtk(statChangeVal);
             }
-
         }
         else if (itemUseType == "StatChangeHp")
         {
-            if(useItemParamList.Count > 0)
+            if (useItemParamList.Count > 0)
             {
                 string str = useItemParamList[0];
                 int statChangeVal = int.Parse(str);
                 var playerComponent = GetLocalPlayer();
                 playerComponent.AddHp(statChangeVal);
-
             }
         }
-            else if (itemUseType == "SummonMonster")
+        else if (itemUseType == "SummonMonster")
+        {
+            if (useItemParamList.Count > 0)
             {
-                if (useItemParamList.Count > 0)
+                string str = useItemParamList[0];
+                var strArr = str.Split(":");
+                if (strArr.Length > 1)
                 {
-                    string str = useItemParamList[0];
-                    var strArr = str.Split(":");
-                    if (strArr.Length > 1)
+                    string monsterDataId = strArr[0];
+
+                    int cost = int.Parse(itemData.SellingPrice);
+                    if (!GoldManager.Inst.HasGold(cost))
                     {
-                        string monsterDataId = strArr[0]; 
-
-                        DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.DNInventory);
-
-                        if (TowerPlacer.Inst != null)
-                        {
-                            TowerPlacer.Inst.StartPlacementFromShop(monsterDataId);
-                        }
+                        Debug.Log("골드가 부족합니다!");
+                        return;
                     }
+                    GoldManager.Inst.SpendGold(cost);
+
+                    DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.DNInventory);
+
+                    if (TowerPlacer.Inst != null)
+                        TowerPlacer.Inst.StartPlacementFromShop(monsterDataId);
                 }
             }
+        }
     }
 
     private bool RequestRemoveItem(bool isRemoveItemExist, int removeTargetIdx)
@@ -193,7 +199,11 @@ public class DaniTechGameManager : MonoBehaviour
     {
         if (currentLife <= 0) return;
         currentLife--;
-        heartList[currentLife].SetActive(false);
+
+        var lifeContainer = FindObjectOfType<LifeContainer>();
+        if (lifeContainer != null)
+            lifeContainer.UpdateHearts(currentLife);
+
         if (currentLife <= 0) TriggerGameOver();
     }
 
@@ -213,20 +223,25 @@ public class DaniTechGameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         currentLife = maxLife;
-        StageManager.Inst.ResetGame();
         popupVictory.SetActive(false);
         popupGameOver.SetActive(false);
 
-        for (int i = 0; i < heartList.Count; i++)
-            heartList[i].SetActive(true);
+        StageManager.Inst.ResetGame();
+
+       
+        if (lifeContainer != null) lifeContainer.SetActive(true);
+        if (wavePanel != null) wavePanel.SetActive(true);
+        if (goldPanel != null) goldPanel.SetActive(true);
+
+        var lifeContainerComp = lifeContainer?.GetComponent<LifeContainer>();
+        if (lifeContainerComp != null)
+            lifeContainerComp.InitHearts(maxLife);
 
         UnitMove[] activeUnits = FindObjectsOfType<UnitMove>();
         foreach (UnitMove unit in activeUnits)
         {
             if (unit != null && unit.gameObject != null)
-            {
                 Destroy(unit.gameObject);
-            }
         }
 
         MonsterMove[] activeMonsters = FindObjectsOfType<MonsterMove>();
@@ -235,9 +250,7 @@ public class DaniTechGameManager : MonoBehaviour
             if (monster != null && monster.gameObject != null)
             {
                 if (DaniTechUIManager.Instance != null && monster._instanceId != 0)
-                {
                     DaniTechUIManager.Instance.RemoveHudSlot(monster._instanceId);
-                }
                 Destroy(monster.gameObject);
             }
         }
@@ -246,9 +259,7 @@ public class DaniTechGameManager : MonoBehaviour
         foreach (GameObject obj in allGameObjects)
         {
             if (obj != null && obj.name.Contains("Tower_"))
-            {
                 Destroy(obj);
-            }
         }
 
         WaveManager.Inst.ResetWave();
@@ -264,8 +275,13 @@ public class DaniTechGameManager : MonoBehaviour
         popupVictory.SetActive(false);
         popupGameOver.SetActive(false);
 
-        for (int i = 0; i < heartList.Count; i++)
-            heartList[i].SetActive(true);
+        if (lifeContainer != null) lifeContainer.SetActive(false);
+        if (wavePanel != null) wavePanel.SetActive(false);
+        if (goldPanel != null) goldPanel.SetActive(false);
+
+        var lifeContainerComp = lifeContainer?.GetComponent<LifeContainer>();
+        if (lifeContainerComp != null)
+            lifeContainerComp.InitHearts(maxLife);
 
         UnitMove[] activeUnits = FindObjectsOfType<UnitMove>();
         foreach (UnitMove unit in activeUnits)

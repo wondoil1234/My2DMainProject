@@ -8,13 +8,12 @@ public class UnitMove : MonoBehaviour
     public float arrivalDistance = 0.1f;
 
     [Header("전투 및 체력 설정")]
-    public int attackDamage = 1;       // 전사의 공격력
-    public float attackCooldown = 1f;  // 공격 주기 (1초에 한 번)
-
+    [SerializeField] public int attackDamage = 1;   
+    [SerializeField] public float attackCooldown = 1f;
+    [SerializeField] public int _baseHp = 50;
     // ⭐ [체력 바 HUD 연동 변수]
     public int _instanceId;            // 유닛 고유 ID
-    public int _baseHp = 50;           // 전사 현재 체력
-    private int _maxHp = 50;           // 전사 최대 체력
+    private int _maxHp = 5000;           // 전사 최대 체력
     public bool _isAlive = true;       // 생존 여부
 
     private Transform[] _waypoints;

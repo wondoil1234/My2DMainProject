@@ -1,24 +1,8 @@
 ﻿using UnityEngine;
-
 public class RobbyUI : DaniTechUIBase
 {
     [SerializeField] private DaniTechUIButton Button_GameStart;
     [SerializeField] private DaniTechUIButton Button_GameQuit;
-
-    private GameObject lifeContainer;
-    private GameObject wavePanel;
-    private GameObject goldPanel;
-
-    private void Start()
-    {
-        lifeContainer = GameObject.Find("LifeContainer");
-        wavePanel = GameObject.Find("WavePanel");
-        goldPanel = GameObject.Find("GoldPanel");
-
-        if (lifeContainer != null) lifeContainer.SetActive(false);
-        if (wavePanel != null) wavePanel.SetActive(false);
-        if (goldPanel != null) goldPanel.SetActive(false);
-    }
 
     private void OnEnable()
     {
@@ -30,9 +14,14 @@ public class RobbyUI : DaniTechUIBase
     {
         Debug.Log("게임을 시작합니다.");
 
-        if (lifeContainer != null) lifeContainer.SetActive(true);
-        if (wavePanel != null) wavePanel.SetActive(true);
-        if (goldPanel != null) goldPanel.SetActive(true);
+        var gm = DaniTechGameManager.Inst;
+        if (gm.lifeContainer != null) gm.lifeContainer.SetActive(true);
+        if (gm.wavePanel != null) gm.wavePanel.SetActive(true);
+        if (gm.goldPanel != null) gm.goldPanel.SetActive(true);
+
+        var lifeContainerComp = gm.lifeContainer?.GetComponent<LifeContainer>();
+        if (lifeContainerComp != null)
+            lifeContainerComp.InitHearts(gm.maxLife);
 
         DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.RobbyUI);
         if (WaveManager.Inst != null)
