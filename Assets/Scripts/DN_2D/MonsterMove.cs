@@ -111,7 +111,6 @@ public class MonsterMove : MonoBehaviour
     {
         if (!_isAlive) return;
 
-        // 1️⃣ 아군 전사(PlayerUnit)와 마주쳤을 때: 정지하고 전투 시작!
         if (collision.CompareTag("PlayerUnit"))
         {
             if (_targetUnit == null)
