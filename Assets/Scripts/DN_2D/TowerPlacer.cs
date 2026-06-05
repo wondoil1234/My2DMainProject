@@ -53,14 +53,12 @@ public class TowerPlacer : MonoBehaviour
         if (_previewTower != null)
             _previewTower.transform.position = mousePos;
 
-        // 좌클릭 → 배치
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
             TryPlaceTower(mousePos);
         }
 
-        // 우클릭 → 취소
         if (Input.GetMouseButtonDown(1))
         {
             CancelPlacement();
@@ -146,6 +144,10 @@ public class TowerPlacer : MonoBehaviour
         tower.layer = LayerMask.NameToLayer("Tower");
         foreach (Transform child in tower.GetComponentsInChildren<Transform>())
             child.gameObject.layer = LayerMask.NameToLayer("Tower");
+
+        TowerAttack towerAttack = tower.GetComponent<TowerAttack>();
+        if (towerAttack != null)
+            towerAttack.OnPlaced();
 
         _isPlacing = false;
         _selectedIndex = -1;
