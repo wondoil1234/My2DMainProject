@@ -27,7 +27,7 @@ public class WaveManager : MonoBehaviour
 
     private int _currentWaveIndex = 0;
     private bool _isWaveRunning = false;
-    private CancellationTokenSource _cts; // ← 추가
+    private CancellationTokenSource _cts; 
 
     private void Awake()
     {
@@ -46,14 +46,12 @@ public class WaveManager : MonoBehaviour
 
     public void ResetWave()
     {
-        // 기존 UniTask 전부 취소
         _cts?.Cancel();
         _cts = new CancellationTokenSource();
 
         _currentWaveIndex = 0;
         _isWaveRunning = false;
 
-        // 몬스터 전부 제거
         MonsterMove[] monsters = FindObjectsOfType<MonsterMove>();
         foreach (MonsterMove monster in monsters)
         {

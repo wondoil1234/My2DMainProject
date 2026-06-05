@@ -31,7 +31,6 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
 
     private void SetInventoryItemSlotOnEnable()
     {
-        // 슬롯 정리 - 혹시 오픈 시점에 다른 슬롯들이 있다면 제거하자
         if(_itemSlotList.Count > 0)
         {
             foreach(var slot in _itemSlotList){
@@ -40,7 +39,6 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
             _itemSlotList.Clear();
         }
 
-        //인벤오픈 1-1) 인벤토리가 열릴때 플레이어가 보유한 모든 아이템을 출력하는 로직을 넣어봅시다
         var itemList = DaniTechGameManager.Inst.GetPlayerItemList();
         if(itemList == null || itemList.Count == 0)
         {
@@ -203,6 +201,7 @@ public class DaniTech_SampleInventoryUI : DaniTechUIBase
                         if (!GoldManager.Inst.HasGold(cost))
                         {
                             Debug.Log("골드가 부족합니다!");
+                            DaniTechUIManager.Instance.CloseContentUI(DaniTechUIType.DNInventory);
                             return;
                         }
 
