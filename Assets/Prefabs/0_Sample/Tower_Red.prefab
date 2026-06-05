@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4160940963772367227}
   - component: {fileID: 6707963438507611458}
   - component: {fileID: 3297426611289915545}
+  - component: {fileID: 7474525386837170199}
   m_Layer: 9
   m_Name: Tower_Red
   m_TagString: Untagged
@@ -169,6 +170,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &7474525386837170199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036595456229640889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff89c03695ddbd40b035538f72a8a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerClickHandler
+  purchaseCost: 0
 --- !u!1 &1062906966711793926
 GameObject:
   m_ObjectHideFlags: 0

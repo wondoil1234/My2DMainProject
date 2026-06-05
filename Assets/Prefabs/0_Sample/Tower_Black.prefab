@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 6144273591814082068}
   - component: {fileID: 2757000979565396300}
   - component: {fileID: 5579851801527433423}
+  - component: {fileID: 8910575644546050960}
   m_Layer: 9
   m_Name: Tower_Black
   m_TagString: Untagged
@@ -200,6 +201,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &8910575644546050960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7496382898789678826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff89c03695ddbd40b035538f72a8a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerClickHandler
+  purchaseCost: 0
 --- !u!1 &8973207256787242714
 GameObject:
   m_ObjectHideFlags: 0

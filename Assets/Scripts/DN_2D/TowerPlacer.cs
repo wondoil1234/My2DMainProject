@@ -145,6 +145,10 @@ public class TowerPlacer : MonoBehaviour
         foreach (Transform child in tower.GetComponentsInChildren<Transform>())
             child.gameObject.layer = LayerMask.NameToLayer("Tower");
 
+        TowerClickHandler clickHandler = tower.GetComponent<TowerClickHandler>();
+        if (clickHandler != null)
+            clickHandler.purchaseCost = towerCosts[_selectedIndex];
+
         TowerAttack towerAttack = tower.GetComponent<TowerAttack>();
         if (towerAttack != null)
             towerAttack.OnPlaced();
